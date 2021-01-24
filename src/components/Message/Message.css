@@ -36,6 +36,7 @@
 }
 
 .message__edit__desc {
+	color: gray;
 	margin-top: 4px;
 	font-size: 3px;
 }

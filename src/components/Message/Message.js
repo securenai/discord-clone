@@ -109,8 +109,8 @@ const Message = ({timestamp, user, message, id, isEdited}) => {
 									handleCloseEditingMode(e);
 								}}>
 								cancel
-							</span>
-							, enter to{' '}
+							</span>{' '}
+							• enter to{' '}
 							<span
 								className="message__edit__save"
 								onClick={() => {

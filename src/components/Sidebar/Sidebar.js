@@ -13,20 +13,23 @@ import SettingsIcon from '@material-ui/icons/Settings';
 import {useSelector} from 'react-redux';
 import {selectUser} from '../../features/userSlice';
 import db, {auth} from '../../firebase';
+import firebase from 'firebase';
 
 const Sidebar = () => {
 	const user = useSelector(selectUser);
 	const [channels, setChannels] = useState([]);
 
 	useEffect(() => {
-		db.collection('channels').onSnapshot((snapshot) =>
-			setChannels(
-				snapshot.docs.map((doc) => ({
-					id: doc.id,
-					channel: doc.data(),
-				}))
-			)
-		);
+		db.collection('channels')
+			.orderBy('createdDateTime', 'asc')
+			.onSnapshot((snapshot) =>
+				setChannels(
+					snapshot.docs.map((doc) => ({
+						id: doc.id,
+						channel: doc.data(),
+					}))
+				)
+			);
 	}, []);
 
 	const handleAddChannel = () => {
@@ -34,6 +37,7 @@ const Sidebar = () => {
 		if (channelName) {
 			db.collection('channels').add({
 				channelName: channelName,
+				createdDateTime: firebase.firestore.FieldValue.serverTimestamp(),
 			});
 		}
 	};
