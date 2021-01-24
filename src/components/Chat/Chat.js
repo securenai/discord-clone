@@ -2,14 +2,14 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import CardGiftcardIcon from '@material-ui/icons/CardGiftcard';
 import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions';
 import GifIcon from '@material-ui/icons/Gif';
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import './Chat.css';
 import ChatHeader from './ChatHeader';
-import {selectChannelId, selectChannelName} from './features/appSlice';
-import {selectUser} from './features/userSlice';
-import Message from './Message';
+import {selectChannelId, selectChannelName} from '../../features/appSlice';
+import {selectUser} from '../../features/userSlice';
+import Message from '../Message/Message';
 import {useSelector} from 'react-redux';
-import db from './firebase';
+import db from '../../firebase';
 import firebase from 'firebase';
 
 const Chat = () => {
@@ -18,15 +18,28 @@ const Chat = () => {
 	const channelName = useSelector(selectChannelName);
 	const [input, setInput] = useState('');
 	const [messages, setMessages] = useState([]);
+	const msgRef = useRef();
+
+	useEffect(() => {
+		if (msgRef.current) {
+			msgRef.current.scrollIntoView({
+				behavior: 'auto',
+				block: 'end',
+				inline: 'nearest',
+			});
+		}
+	}, [messages]);
 
 	useEffect(() => {
 		if (channelId) {
 			db.collection('channels')
 				.doc(channelId)
 				.collection('messages')
-				.orderBy('timestamp', 'desc')
+				.orderBy('timestamp', 'asc')
 				.onSnapshot((snapshot) =>
-					setMessages(snapshot.docs.map((doc) => doc.data()))
+					setMessages(
+						snapshot.docs.map((doc) => ({id: doc.id, data: doc.data()}))
+					)
 				);
 		}
 	}, [channelId]);
@@ -36,8 +49,10 @@ const Chat = () => {
 		db.collection('channels').doc(channelId).collection('messages').add({
 			timestamp: firebase.firestore.FieldValue.serverTimestamp(),
 			message: input,
+			isEdited: false,
 			user: user,
 		});
+		console.log(msgRef.current);
 		setInput('');
 	};
 
@@ -48,11 +63,15 @@ const Chat = () => {
 			<div className="chat__messages">
 				{messages.map((message) => {
 					return (
-						<Message
-							timestamp={message.timestamp}
-							message={message.message}
-							user={message.user}
-						/>
+						<div ref={msgRef} key={message.id}>
+							<Message
+								id={message.id}
+								timestamp={message.data.timestamp}
+								message={message.data.message}
+								user={message.data.user}
+								isEdited={message.data.isEdited}
+							/>
+						</div>
 					);
 				})}
 			</div>

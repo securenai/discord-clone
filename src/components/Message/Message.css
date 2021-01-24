@@ -1,0 +1,57 @@
+.message {
+	display: flex;
+	align-items: center;
+	padding: 20px;
+	color: white;
+}
+
+.message:hover {
+	background-color: #32353b;
+}
+
+.message__info {
+	margin-left: 20px;
+}
+
+.message__timestamp {
+	color: gray;
+	margin-left: 20px;
+	font-size: x-small;
+}
+
+.message__edit__input__container {
+	border-radius: 8px;
+	background-color: #40444b;
+	margin: 10px 5px 0px 0px;
+}
+
+.message__edit__input {
+	padding: 10px;
+	background: transparent;
+	width: 600px;
+	border: none;
+	outline-width: 0;
+	color: white;
+	font-size: 15px;
+}
+
+.message__edit__desc {
+	margin-top: 4px;
+	font-size: 3px;
+}
+
+.message__edit__canc,
+.message__edit__save {
+	color: #7289da;
+	cursor: pointer;
+}
+
+.message__edit__inputButton {
+	display: none;
+}
+
+.is_message_edited {
+	font-size: x-small;
+	color: gray;
+	margin-left: 1%;
+}

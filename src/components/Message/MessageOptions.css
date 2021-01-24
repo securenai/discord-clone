@@ -1,0 +1,28 @@
+.msg_btn_container {
+	position: relative;
+	right: 0;
+	z-index: 1;
+	top: -25px;
+	padding: 0 14px 0 32px;
+}
+.msg_btn_wrapper {
+	color: rgb(216, 213, 213);
+	background-color: #36393f;
+	border: #3c3f36 1px solid;
+	display: grid;
+	grid-auto-flow: column;
+	box-sizing: border-box;
+	height: 32px;
+	border-radius: 4px;
+	align-items: center;
+	justify-content: flex-start;
+	padding: 2px 5px;
+}
+.msg_btn {
+	cursor: pointer;
+	padding: 0px 5px;
+}
+.msg_btn:hover {
+	background-color: #424447;
+	color: rgb(248, 244, 244);
+}
