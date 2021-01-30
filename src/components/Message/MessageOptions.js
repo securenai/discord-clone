@@ -1,15 +1,11 @@
 import React from 'react';
-import {useSelector} from 'react-redux';
 import './MessageOptions.css';
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import EditIcon from '@material-ui/icons/Edit';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
-import {selectChannelId} from '../../features/appSlice';
-import db from '../../firebase';
 
-const MessageOptions = ({msgId, openMsgEdit}) => {
-	const channelId = useSelector(selectChannelId);
+const MessageOptions = ({msgId, openMsgEdit, openMsgDelete}) => {
 	return (
 		<div className="msg_btn_container">
 			<div className="msg_btn_wrapper">
@@ -26,17 +22,12 @@ const MessageOptions = ({msgId, openMsgEdit}) => {
 				<div className="msg_btn">
 					<MoreHorizIcon />
 				</div>
-				<div
-					className="msg_btn"
-					onClick={(e) =>
-						db
-							.collection('channels')
-							.doc(channelId)
-							.collection('messages')
-							.doc(msgId)
-							.delete()
-					}>
-					<DeleteForeverIcon />
+				<div className="msg_btn">
+					<DeleteForeverIcon
+						onClick={() => {
+							openMsgDelete(msgId);
+						}}
+					/>
 				</div>
 			</div>
 		</div>

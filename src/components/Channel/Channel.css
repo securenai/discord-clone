@@ -1,0 +1,7 @@
+.channel__container {
+	width: 100%;
+}
+.channel__main {
+	display: flex;
+	overflow: hidden;
+}

@@ -1,20 +1,23 @@
 import {Avatar} from '@material-ui/core';
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useState} from 'react';
 import './Message.css';
 import MessageOptions from './MessageOptions';
-import {selectCurrMsgEditing} from '../../features/appSlice';
-import {useSelector, useDispatch} from 'react-redux';
-import {setMessageInfo, selectChannelId} from '../../features/appSlice';
 import db from '../../firebase';
+import MessageEdit from './MessageEdit';
+import MessageDelete from './MessageDelete';
+import {useDispatch, useSelector} from 'react-redux';
+import {
+	selectCurrMsgEditing,
+	setMessageInfo,
+} from '../../features/appSlice';
 
-const Message = ({timestamp, user, message, id, isEdited}) => {
+const Message = ({timestamp, user, message, id, isEdited, channelId}) => {
 	const dispatch = useDispatch();
 	const currEditingMsg = useSelector(selectCurrMsgEditing);
-	const channelId = useSelector(selectChannelId);
 	const [openEdit, setOpenEdit] = useState(false);
+	const [openDelete, setOpenDelete] = useState(false);
 	const [editInput, setEditInput] = useState('');
 	const [showMsgOpt, setShowMsgOpt] = useState(false);
-	// const editMsgInputRef = useRef();
 
 	const handleOpenMsgEdit = (msgId) => {
 		dispatch(
@@ -24,7 +27,11 @@ const Message = ({timestamp, user, message, id, isEdited}) => {
 		);
 		setOpenEdit(true);
 		setEditInput(message.trim());
-		// editMsgInputRef.current.focus();
+	};
+
+	const handleOpenMsgDelete = (msgId) => {
+		setShowMsgOpt(false);
+		setOpenDelete(true);
 	};
 
 	const handleChangeMessage = (e) => {
@@ -47,7 +54,7 @@ const Message = ({timestamp, user, message, id, isEdited}) => {
 		handleCloseEditingMode();
 	};
 
-	const handleCloseEditingMode = (e) => {
+	const handleCloseEditingMode = () => {
 		dispatch(
 			setMessageInfo({
 				currMsgEditing: null,
@@ -57,9 +64,10 @@ const Message = ({timestamp, user, message, id, isEdited}) => {
 		setShowMsgOpt(false);
 	};
 
-	// useEffect(() => {
-	// 	console.log(editMsgInputRef);
-	// }, [editInput]);
+	const handleCloseDeletePopup = (e) => {
+		setOpenDelete(false);
+		setShowMsgOpt(false);
+	};
 
 	return (
 		<div
@@ -67,9 +75,6 @@ const Message = ({timestamp, user, message, id, isEdited}) => {
 			onMouseEnter={() => setShowMsgOpt(true)}
 			onMouseLeave={() => setShowMsgOpt(false)}>
 			<Avatar src={user.photo} />
-			{/* <div>
-				<input ref={editMsgInputRef} className="test" />
-			</div> */}
 			<div className="message__info">
 				<h4>
 					<span>{user.displayName}</span>
@@ -77,49 +82,14 @@ const Message = ({timestamp, user, message, id, isEdited}) => {
 						{new Date(timestamp?.toDate()).toUTCString()}
 					</span>
 				</h4>
-				{openEdit === true && currEditingMsg === id ? (
-					<div>
-						<div className="message__edit__input__container">
-							<form>
-								<input
-									autoFocus
-									// ref={editMsgInputRef}
-									className="message__edit__input"
-									value={editInput}
-									onChange={(e) => handleChangeMessage(e)}
-									onKeyDown={(e) => {
-										if (e.keyCode === 27) {
-											handleCloseEditingMode(e);
-										}
-									}}
-								/>
-								<button
-									className="message__edit__inputButton"
-									type="submit"
-									onClick={() => {
-										handleSaveEditedMessage(id);
-									}}></button>
-							</form>
-						</div>
-						<div className="message__edit__desc">
-							escape to{' '}
-							<span
-								className="message__edit__canc"
-								onClick={(e) => {
-									handleCloseEditingMode(e);
-								}}>
-								cancel
-							</span>{' '}
-							• enter to{' '}
-							<span
-								className="message__edit__save"
-								onClick={() => {
-									handleSaveEditedMessage(id);
-								}}>
-								save
-							</span>
-						</div>
-					</div>
+				{currEditingMsg === id && openEdit === true ? (
+					<MessageEdit
+						editInput={editInput}
+						editMessage={handleChangeMessage}
+						closeEdit={handleCloseEditingMode}
+						saveEdit={() => handleSaveEditedMessage(id)}
+						messageId={id}
+					/>
 				) : (
 					<p>
 						{message}
@@ -129,9 +99,29 @@ const Message = ({timestamp, user, message, id, isEdited}) => {
 					</p>
 				)}
 			</div>
-			{showMsgOpt === true && currEditingMsg !== id ? (
-				<MessageOptions msgId={id} openMsgEdit={handleOpenMsgEdit} />
-			) : null}
+
+			<div>
+				{currEditingMsg !== id && showMsgOpt === true ? (
+					<MessageOptions
+						msgId={id}
+						openMsgEdit={handleOpenMsgEdit}
+						openMsgDelete={handleOpenMsgDelete}
+					/>
+				) : null}
+			</div>
+
+			<div>
+				{openDelete === true ? (
+					<MessageDelete
+						closeDelete={handleCloseDeletePopup}
+						channelId={channelId}
+						user={user}
+						msgId={id}
+						timestamp={timestamp}
+						message={message}
+					/>
+				) : null}
+			</div>
 		</div>
 	);
 };

@@ -1,12 +1,11 @@
 import React, {useEffect} from 'react';
 import './App.css';
-import Chat from '../Chat/Chat';
-import Sidebar from '../Sidebar/Sidebar';
 import {selectUser} from '../../features/userSlice';
 import {useDispatch, useSelector} from 'react-redux';
 import Login from '../Login/Login';
 import {auth} from '../../firebase';
 import {login, logout} from '../../features/userSlice';
+import Channel from '../Channel/Channel';
 
 function App() {
 	const dispatch = useDispatch();
@@ -25,24 +24,12 @@ function App() {
 					})
 				);
 			} else {
-				console.log('huhuhuhuhu');
 				dispatch(logout());
 			}
 		});
 	}, [dispatch]);
 
-	return (
-		<div className="app">
-			{user ? (
-				<>
-					<Sidebar />
-					<Chat />
-				</>
-			) : (
-				<Login />
-			)}
-		</div>
-	);
+	return <div className="app">{user ? <Channel /> : <Login />}</div>;
 }
 
 export default App;

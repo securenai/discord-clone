@@ -3,9 +3,10 @@ import {createSlice} from '@reduxjs/toolkit';
 export const appSlice = createSlice({
 	name: 'app',
 	initialState: {
-		channelId: null,
-		channelName: null,
+		channelId: localStorage.getItem('lastVisitedChannelId') || null,
+		channelName: localStorage.getItem('lastVisitedChannelName') || null,
 		currMsgEditing: null,
+		currMsgDeleting: null,
 	},
 	reducers: {
 		setChannelInfo: (state, action) => {
@@ -18,6 +19,7 @@ export const appSlice = createSlice({
 		},
 		setMessageInfo: (state, action) => {
 			state.currMsgEditing = action.payload.currMsgEditing;
+			state.currMsgDeleting = action.payload.currMsgDeleting;
 		},
 	},
 });
@@ -30,5 +32,6 @@ export const {setChannelInfo, setMessageInfo} = appSlice.actions;
 export const selectChannelId = (state) => state.app.channelId;
 export const selectChannelName = (state) => state.app.channelName;
 export const selectCurrMsgEditing = (state) => state.app.currMsgEditing;
+export const selectCurrMsgDeleting = (state) => state.app.currMsgDeleting;
 
 export default appSlice.reducer;

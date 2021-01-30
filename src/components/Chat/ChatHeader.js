@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './ChatHeader.css';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import EditLocationIcon from '@material-ui/icons/EditLocation';
@@ -8,6 +8,10 @@ import InboxIcon from '@material-ui/icons/Inbox';
 import HelpRoundedIcon from '@material-ui/icons/HelpRounded';
 
 const ChatHeader = ({channelName}) => {
+	useEffect(() => {
+		localStorage.setItem('lastVisitedChannelName', channelName);
+	});
+
 	return (
 		<div className="chatHeader">
 			<div className="chatHeader__left">

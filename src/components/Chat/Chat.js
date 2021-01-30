@@ -11,6 +11,7 @@ import Message from '../Message/Message';
 import {useSelector} from 'react-redux';
 import db from '../../firebase';
 import firebase from 'firebase';
+import ChatStartPoint from './ChatStartPoint';
 
 const Chat = () => {
 	const user = useSelector(selectUser);
@@ -59,13 +60,16 @@ const Chat = () => {
 	return (
 		<div className="chat">
 			<ChatHeader channelName={channelName} />
-
 			<div className="chat__messages">
+				<div className="chat__chatStartPoint_section">
+					<ChatStartPoint channelName={channelName} />
+				</div>
 				{messages.map((message) => {
 					return (
 						<div ref={msgRef} key={message.id}>
 							<Message
 								id={message.id}
+								channelId={channelId}
 								timestamp={message.data.timestamp}
 								message={message.data.message}
 								user={message.data.user}

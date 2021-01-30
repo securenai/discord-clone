@@ -7,6 +7,7 @@
 
 .message:hover {
 	background-color: #32353b;
+	opacity: 1;
 }
 
 .message__info {
@@ -19,40 +20,14 @@
 	font-size: x-small;
 }
 
-.message__edit__input__container {
-	border-radius: 8px;
-	background-color: #40444b;
-	margin: 10px 5px 0px 0px;
-}
-
-.message__edit__input {
-	padding: 10px;
-	background: transparent;
-	width: 600px;
-	border: none;
-	outline-width: 0;
-	color: white;
-	font-size: 15px;
-}
-
-.message__edit__desc {
-	color: gray;
-	margin-top: 4px;
-	font-size: 3px;
-}
-
-.message__edit__canc,
-.message__edit__save {
-	color: #7289da;
-	cursor: pointer;
-}
-
-.message__edit__inputButton {
-	display: none;
-}
-
 .is_message_edited {
 	font-size: x-small;
 	color: gray;
 	margin-left: 1%;
 }
+/* .msg_opt_wrapper_hide {
+	opacity: 0;
+}
+.msg_opt_wrapper_show {
+	opacity: 1;
+} */

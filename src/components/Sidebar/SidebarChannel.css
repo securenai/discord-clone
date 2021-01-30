@@ -1,6 +1,9 @@
+.sidebarChannel {
+	padding: 1px 8px;
+}
 .sidebarChannel:hover > h4 {
 	color: white;
-	background-color: #40464b;
+	background-color: #34373c;
 }
 
 .sidebarChannel > h4 {
@@ -10,9 +13,15 @@
 	background-color: #2f3135;
 	color: gray;
 	cursor: pointer;
+	border-radius: 10px;
 }
 
 .sidebarChannel__hash {
 	font-size: 28px;
 	padding: 8px;
+}
+
+.sidebarCurr > h4 {
+	background-color: #393c43;
+	color: white;
 }
