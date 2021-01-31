@@ -1,17 +1,14 @@
-import {Avatar} from '@material-ui/core';
-import React, {useState} from 'react';
-import './Message.css';
+import { Avatar } from '@material-ui/core';
+import React, { useState } from 'react';
+import { Msg, MsgInfo, MsgTimeStamp, MsgIsEdited } from './style';
 import MessageOptions from './MessageOptions';
 import db from '../../firebase';
 import MessageEdit from './MessageEdit';
 import MessageDelete from './MessageDelete';
-import {useDispatch, useSelector} from 'react-redux';
-import {
-	selectCurrMsgEditing,
-	setMessageInfo,
-} from '../../features/appSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectCurrMsgEditing, setMessageInfo } from '../../features/appSlice';
 
-const Message = ({timestamp, user, message, id, isEdited, channelId}) => {
+const Message = ({ timestamp, user, message, id, isEdited, channelId }) => {
 	const dispatch = useDispatch();
 	const currEditingMsg = useSelector(selectCurrMsgEditing);
 	const [openEdit, setOpenEdit] = useState(false);
@@ -22,7 +19,7 @@ const Message = ({timestamp, user, message, id, isEdited, channelId}) => {
 	const handleOpenMsgEdit = (msgId) => {
 		dispatch(
 			setMessageInfo({
-				currMsgEditing: msgId,
+				currMsgEditing: msgId
 			})
 		);
 		setOpenEdit(true);
@@ -42,13 +39,13 @@ const Message = ({timestamp, user, message, id, isEdited, channelId}) => {
 		const notEdited = message === editInput.trim();
 		const sendData =
 			notEdited === true
-				? {message: editInput.trim()}
-				: {message: editInput.trim(), isEdited: true};
+				? { message: editInput.trim() }
+				: { message: editInput.trim(), isEdited: true };
 		db.collection('channels')
 			.doc(channelId)
 			.collection('messages')
 			.doc(msgId)
-			.set(sendData, {merge: true});
+			.set(sendData, { merge: true });
 		setOpenEdit(false);
 		setShowMsgOpt(false);
 		handleCloseEditingMode();
@@ -57,7 +54,7 @@ const Message = ({timestamp, user, message, id, isEdited, channelId}) => {
 	const handleCloseEditingMode = () => {
 		dispatch(
 			setMessageInfo({
-				currMsgEditing: null,
+				currMsgEditing: null
 			})
 		);
 		setOpenEdit(false);
@@ -70,17 +67,17 @@ const Message = ({timestamp, user, message, id, isEdited, channelId}) => {
 	};
 
 	return (
-		<div
-			className="message"
+		<Msg
 			onMouseEnter={() => setShowMsgOpt(true)}
 			onMouseLeave={() => setShowMsgOpt(false)}>
 			<Avatar src={user.photo} />
-			<div className="message__info">
+
+			<MsgInfo>
 				<h4>
 					<span>{user.displayName}</span>
-					<span className="message__timestamp">
+					<MsgTimeStamp>
 						{new Date(timestamp?.toDate()).toUTCString()}
-					</span>
+					</MsgTimeStamp>
 				</h4>
 				{currEditingMsg === id && openEdit === true ? (
 					<MessageEdit
@@ -94,16 +91,19 @@ const Message = ({timestamp, user, message, id, isEdited, channelId}) => {
 					<p>
 						{message}
 						{isEdited === true ? (
-							<span className="is_message_edited">(edited)</span>
+							<MsgIsEdited>
+								<span>(edited)</span>
+							</MsgIsEdited>
 						) : null}
 					</p>
 				)}
-			</div>
+			</MsgInfo>
 
 			<div>
 				{currEditingMsg !== id && showMsgOpt === true ? (
 					<MessageOptions
 						msgId={id}
+						user={user}
 						openMsgEdit={handleOpenMsgEdit}
 						openMsgDelete={handleOpenMsgDelete}
 					/>
@@ -122,7 +122,7 @@ const Message = ({timestamp, user, message, id, isEdited, channelId}) => {
 					/>
 				) : null}
 			</div>
-		</div>
+		</Msg>
 	);
 };
 

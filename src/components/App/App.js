@@ -1,10 +1,10 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
-import {selectUser} from '../../features/userSlice';
-import {useDispatch, useSelector} from 'react-redux';
+import { selectUser } from '../../features/userSlice';
+import { useDispatch, useSelector } from 'react-redux';
 import Login from '../Login/Login';
-import {auth} from '../../firebase';
-import {login, logout} from '../../features/userSlice';
+import { auth } from '../../firebase';
+import { login, logout } from '../../features/userSlice';
 import Channel from '../Channel/Channel';
 
 function App() {
@@ -20,7 +20,7 @@ function App() {
 						uid: authUser.uid,
 						photo: authUser.photoURL,
 						email: authUser.email,
-						displayName: authUser.displayName,
+						displayName: authUser.displayName
 					})
 				);
 			} else {

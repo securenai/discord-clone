@@ -2,13 +2,13 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import CardGiftcardIcon from '@material-ui/icons/CardGiftcard';
 import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions';
 import GifIcon from '@material-ui/icons/Gif';
-import React, {useState, useEffect, useRef} from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './Chat.css';
 import ChatHeader from './ChatHeader';
-import {selectChannelId, selectChannelName} from '../../features/appSlice';
-import {selectUser} from '../../features/userSlice';
+import { selectChannelId, selectChannelName } from '../../features/appSlice';
+import { selectUser } from '../../features/userSlice';
 import Message from '../Message/Message';
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
 import db from '../../firebase';
 import firebase from 'firebase';
 import ChatStartPoint from './ChatStartPoint';
@@ -26,7 +26,7 @@ const Chat = () => {
 			msgRef.current.scrollIntoView({
 				behavior: 'auto',
 				block: 'end',
-				inline: 'nearest',
+				inline: 'nearest'
 			});
 		}
 	}, [messages]);
@@ -39,7 +39,7 @@ const Chat = () => {
 				.orderBy('timestamp', 'asc')
 				.onSnapshot((snapshot) =>
 					setMessages(
-						snapshot.docs.map((doc) => ({id: doc.id, data: doc.data()}))
+						snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
 					)
 				);
 		}
@@ -51,7 +51,7 @@ const Chat = () => {
 			timestamp: firebase.firestore.FieldValue.serverTimestamp(),
 			message: input,
 			isEdited: false,
-			user: user,
+			user: user
 		});
 		console.log(msgRef.current);
 		setInput('');

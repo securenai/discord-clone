@@ -1,54 +1,37 @@
 import React from 'react';
-import './MessageEdit.css';
+import {
+	MsgEditContainer,
+	MsgEditInput,
+	MsgEditDescription,
+	MsgEditSubmitBtn,
+	MsgEditCancel,
+	MsgEditSave
+} from './style';
 
-const MessageEdit = ({
-	editInput,
-	editMessage,
-	closeEdit,
-	saveEdit,
-	id,
-}) => {
+const MessageEdit = ({ editInput, editMessage, closeEdit, saveEdit, id }) => {
 	return (
 		<div>
-			<div className="message__edit__input__container">
+			<MsgEditContainer>
 				<form>
-					<input
+					<MsgEditInput
 						autoFocus
-						className="message__edit__input"
 						value={editInput}
 						onChange={(e) => editMessage(e)}
 						onKeyDown={(e) => {
-							if (e.keyCode === 27) {
-								closeEdit(e);
-							}
+							if (e.keyCode === 27) closeEdit(e);
 						}}
 					/>
-					<button
-						className="message__edit__inputButton"
+					<MsgEditSubmitBtn
 						type="submit"
-						onClick={() => {
-							saveEdit(id);
-						}}></button>
+						onClick={() => saveEdit(id)}></MsgEditSubmitBtn>
 				</form>
-			</div>
-			<div className="message__edit__desc">
-				escape to{' '}
-				<span
-					className="message__edit__canc"
-					onClick={(e) => {
-						closeEdit(e);
-					}}>
-					cancel
-				</span>{' '}
-				• enter to{' '}
-				<span
-					className="message__edit__save"
-					onClick={() => {
-						saveEdit(id);
-					}}>
-					save
-				</span>
-			</div>
+			</MsgEditContainer>
+			<MsgEditDescription>
+				<span>escape to </span>
+				<MsgEditCancel onClick={(e) => closeEdit(e)}>cancel</MsgEditCancel>
+				<span> • enter to </span>
+				<MsgEditSave onClick={() => saveEdit(id)}>save</MsgEditSave>
+			</MsgEditDescription>
 		</div>
 	);
 };
