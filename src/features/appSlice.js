@@ -1,12 +1,14 @@
-import {createSlice} from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
+import { defaultChannelId, defaultChannelName } from '../config';
 
 export const appSlice = createSlice({
 	name: 'app',
 	initialState: {
-		channelId: localStorage.getItem('lastVisitedChannelId') || null,
-		channelName: localStorage.getItem('lastVisitedChannelName') || null,
+		channelId: localStorage.getItem('lastVisitedChannelId') || defaultChannelId,
+		channelName:
+			localStorage.getItem('lastVisitedChannelName') || defaultChannelName,
 		currMsgEditing: null,
-		currMsgDeleting: null,
+		currMsgDeleting: null
 	},
 	reducers: {
 		setChannelInfo: (state, action) => {
@@ -20,11 +22,11 @@ export const appSlice = createSlice({
 		setMessageInfo: (state, action) => {
 			state.currMsgEditing = action.payload.currMsgEditing;
 			state.currMsgDeleting = action.payload.currMsgDeleting;
-		},
-	},
+		}
+	}
 });
 
-export const {setChannelInfo, setMessageInfo} = appSlice.actions;
+export const { setChannelInfo, setMessageInfo } = appSlice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of

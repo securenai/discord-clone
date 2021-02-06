@@ -40,7 +40,7 @@
 	background-color: #474b53;
 }
 
-.chat__input > form > input {
+.chat__input > form > div {
 	padding: 10px;
 	background: transparent;
 	/* width: 100%; */
@@ -60,4 +60,16 @@
 
 .chat__inputIcons > .MuiSvgIcon-root {
 	padding: 5px;
+}
+.msg_submit {
+	display: none;
+}
+[contenteditable='true']:empty:before {
+	content: attr(placeholder);
+	display: block;
+	color: #aaa;
+}
+[contenteditable='true'] {
+	cursor: text;
+	-webkit-user-modify: read-write-plaintext-only;
 }

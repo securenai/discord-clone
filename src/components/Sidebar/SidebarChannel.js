@@ -1,11 +1,11 @@
-import React, {useEffect} from 'react';
-import {useDispatch} from 'react-redux';
-import {setChannelInfo} from '../../features/appSlice';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { setChannelInfo } from '../../features/appSlice';
 import './SidebarChannel.css';
-import {useSelector} from 'react-redux';
-import {selectChannelId} from '../../features/appSlice';
+import { useSelector } from 'react-redux';
+import { selectChannelId } from '../../features/appSlice';
 
-const SideBarChannel = ({id, channelName}) => {
+const SideBarChannel = ({ id, channelName }) => {
 	const dispatch = useDispatch();
 	const channelId = useSelector(selectChannelId);
 
@@ -22,7 +22,7 @@ const SideBarChannel = ({id, channelName}) => {
 				dispatch(
 					setChannelInfo({
 						channelId: id,
-						channelName: channelName,
+						channelName: channelName
 					})
 				)
 			}>

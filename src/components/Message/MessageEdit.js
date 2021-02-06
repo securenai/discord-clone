@@ -1,36 +1,57 @@
-import React from 'react';
+import React, { useRef, useState, useEffect } from 'react';
+import ContentEditable from 'react-contenteditable';
+import './style.css';
 import {
 	MsgEditContainer,
-	MsgEditInput,
 	MsgEditDescription,
-	MsgEditSubmitBtn,
 	MsgEditCancel,
 	MsgEditSave
 } from './style';
 
-const MessageEdit = ({ editInput, editMessage, closeEdit, saveEdit, id }) => {
+const MessageEdit = ({
+	editInput,
+	editMessage,
+	closeEdit,
+	saveEdit,
+	messageId
+}) => {
+	const formRef = useRef(null);
+	const [editText, setEditText] = useState('');
+
+	useEffect(() => {
+		setEditText(editInput);
+	}, [editInput]);
+
+	useEffect(() => {
+		formRef.current.children[0].focus();
+	}, [formRef]);
+
+	const handleKeyPress = (e) => {
+		if (e.key === 'Escape') {
+			closeEdit(e);
+		}
+		if (e.key === 'Enter' && !e.shiftKey) {
+			e.preventDefault();
+			saveEdit(messageId);
+		}
+	};
+
 	return (
 		<div>
 			<MsgEditContainer>
-				<form>
-					<MsgEditInput
-						autoFocus
-						value={editInput}
+				<form ref={formRef}>
+					<ContentEditable
+						html={editText}
 						onChange={(e) => editMessage(e)}
-						onKeyDown={(e) => {
-							if (e.keyCode === 27) closeEdit(e);
-						}}
+						onKeyDown={handleKeyPress}
 					/>
-					<MsgEditSubmitBtn
-						type="submit"
-						onClick={() => saveEdit(id)}></MsgEditSubmitBtn>
 				</form>
 			</MsgEditContainer>
 			<MsgEditDescription>
 				<span>escape to </span>
 				<MsgEditCancel onClick={(e) => closeEdit(e)}>cancel</MsgEditCancel>
 				<span> • enter to </span>
-				<MsgEditSave onClick={() => saveEdit(id)}>save</MsgEditSave>
+				<MsgEditSave onClick={() => saveEdit(messageId)}>save</MsgEditSave>
 			</MsgEditDescription>
 		</div>
 	);

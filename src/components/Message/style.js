@@ -17,7 +17,7 @@ export const MsgInfo = styled.div`
 
 export const MsgTimeStamp = styled.span`
 	color: gray;
-	margin-left: 20px;
+	margin-left: 10px;
 	font-size: x-small;
 }
 `;
@@ -39,7 +39,7 @@ export const MsgDelDialogTitle = styled.span`
 	font-weight: 900;
 `;
 
-export const MsgDelDialogPromptQues = styled.div`
+export const MsgDelDialogPromptQues = styled.span`
 	color: #dcddde;
 	font-size: 14px;
 `;
@@ -97,15 +97,15 @@ export const MsgEditContainer = styled.div`
 	margin: 10px 5px 0px 0px;
 `;
 
-export const MsgEditInput = styled.input`
-	padding: 10px;
-	background: transparent;
-	width: 600px;
-	border: none;
-	outline-width: 0;
-	color: white;
-	font-size: 15px;
-`;
+// export const MsgEditInput = styled.div`
+// 	padding: 10px;
+// 	background: transparent;
+// 	width: 600px;
+// 	border: none;
+// 	outline-width: 0;
+// 	color: white;
+// 	font-size: 15px;
+// `;
 
 export const MsgEditDescription = styled.div`
 	color: gray;

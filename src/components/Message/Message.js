@@ -1,5 +1,5 @@
 import { Avatar } from '@material-ui/core';
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Msg, MsgInfo, MsgTimeStamp, MsgIsEdited } from './style';
 import MessageOptions from './MessageOptions';
 import db from '../../firebase';
@@ -7,15 +7,20 @@ import MessageEdit from './MessageEdit';
 import MessageDelete from './MessageDelete';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCurrMsgEditing, setMessageInfo } from '../../features/appSlice';
+import { timeStampConversion } from '../../utils/util';
+import { decode } from 'html-entities';
 
 const Message = ({ timestamp, user, message, id, isEdited, channelId }) => {
 	const dispatch = useDispatch();
 	const currEditingMsg = useSelector(selectCurrMsgEditing);
 	const [openEdit, setOpenEdit] = useState(false);
 	const [openDelete, setOpenDelete] = useState(false);
-	const [editInput, setEditInput] = useState('');
+	const text = useRef('');
+	// const [editInput, setEditInput] = useState('');
 	const [showMsgOpt, setShowMsgOpt] = useState(false);
-
+	// const d = new Date(timestamp.toDate());
+	// console.log(typeof d);
+	// debugger;
 	const handleOpenMsgEdit = (msgId) => {
 		dispatch(
 			setMessageInfo({
@@ -23,7 +28,7 @@ const Message = ({ timestamp, user, message, id, isEdited, channelId }) => {
 			})
 		);
 		setOpenEdit(true);
-		setEditInput(message.trim());
+		text.current = message.trim();
 	};
 
 	const handleOpenMsgDelete = (msgId) => {
@@ -32,15 +37,17 @@ const Message = ({ timestamp, user, message, id, isEdited, channelId }) => {
 	};
 
 	const handleChangeMessage = (e) => {
-		setEditInput(e.target.value);
+		text.current = decode(e.target.value);
 	};
 
 	const handleSaveEditedMessage = (msgId) => {
-		const notEdited = message === editInput.trim();
+		console.log(text);
+		if (text.current.trim() === '') return;
+		const notEdited = message === text.current.trim();
 		const sendData =
 			notEdited === true
-				? { message: editInput.trim() }
-				: { message: editInput.trim(), isEdited: true };
+				? { message: text.current.trim() }
+				: { message: text.current.trim(), isEdited: true };
 		db.collection('channels')
 			.doc(channelId)
 			.collection('messages')
@@ -52,6 +59,7 @@ const Message = ({ timestamp, user, message, id, isEdited, channelId }) => {
 	};
 
 	const handleCloseEditingMode = () => {
+		console.log('close edit');
 		dispatch(
 			setMessageInfo({
 				currMsgEditing: null
@@ -76,26 +84,27 @@ const Message = ({ timestamp, user, message, id, isEdited, channelId }) => {
 				<h4>
 					<span>{user.displayName}</span>
 					<MsgTimeStamp>
-						{new Date(timestamp?.toDate()).toUTCString()}
+						{/* {new Date(timestamp?.toDate()).toLocaleString()} */}
+						{timestamp !== null ? timeStampConversion(timestamp) : ''}
 					</MsgTimeStamp>
 				</h4>
 				{currEditingMsg === id && openEdit === true ? (
 					<MessageEdit
-						editInput={editInput}
+						editInput={text.current}
 						editMessage={handleChangeMessage}
 						closeEdit={handleCloseEditingMode}
 						saveEdit={() => handleSaveEditedMessage(id)}
 						messageId={id}
 					/>
 				) : (
-					<p>
+					<div>
 						{message}
 						{isEdited === true ? (
 							<MsgIsEdited>
 								<span>(edited)</span>
 							</MsgIsEdited>
 						) : null}
-					</p>
+					</div>
 				)}
 			</MsgInfo>
 
