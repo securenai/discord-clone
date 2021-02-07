@@ -4,7 +4,7 @@ import styled from 'styled-components';
 export const Msg = styled.div`
 	display: flex;
 	align-items: center;
-	padding: 20px;
+	padding: 10px 20px;
 	color: white;
 	&:hover {
 		background-color: #32353b;
@@ -18,12 +18,26 @@ export const MsgInfo = styled.div`
 export const MsgTimeStamp = styled.span`
 	color: gray;
 	margin-left: 10px;
-	font-size: x-small;
+	font-size: 0.75rem;
+}
+`;
+
+export const MsgDisplayName = styled.span`
+	color: white;
+	font-size: 15px;
+	font-weight: 500
+}
+`;
+
+export const MsgContent = styled.span`
+	color: #dcddde;
+	font-size: 14px;
+	font-weight: 400
 }
 `;
 
 export const MsgIsEdited = styled.span`
-	font-size: x-small;
+	font-size: 0.75rem;
 	color: gray;
 	margin-left: 1%;
 `;

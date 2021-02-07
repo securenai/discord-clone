@@ -1,12 +1,12 @@
 .sidebarChannel {
 	padding: 1px 8px;
 }
-.sidebarChannel:hover > h4 {
+.sidebarChannel:hover > div {
 	color: white;
 	background-color: #34373c;
 }
 
-.sidebarChannel > h4 {
+.sidebarChannel > div {
 	display: flex;
 	padding-left: 15px;
 	align-items: center;
@@ -14,11 +14,13 @@
 	color: gray;
 	cursor: pointer;
 	border-radius: 10px;
+	font-size: 16px;
+	font-weight: 500;
 }
 
 .sidebarChannel__hash {
-	font-size: 28px;
-	padding: 8px;
+	font-size: 25px;
+	padding: 0px 8px;
 }
 
 .sidebarCurr > h4 {

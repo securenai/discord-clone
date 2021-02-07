@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import CardGiftcardIcon from '@material-ui/icons/CardGiftcard';
 import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions';
 import GifIcon from '@material-ui/icons/Gif';
 import ContentEditable from 'react-contenteditable';
-import { decode, encode } from 'html-entities';
+import { decode } from 'html-entities';
 import firebase from 'firebase';
 import db from '../../firebase';
 
@@ -33,11 +33,11 @@ const ChatTextArea = ({ channelId, channelName, user }) => {
 			e.preventDefault();
 			btnRef.current.click();
 		}
-		if (e.key === 'Enter' && e.shiftKey) {
-			console.log(decode(e.target.innerHTML));
-			console.log('-------------------------');
-			console.log(encode(e.target.innerHTML));
-		}
+		// if (e.key === 'Enter' && e.shiftKey) {
+		// 	console.log(decode(e.target.innerHTML));
+		// 	console.log('-------------------------');
+		// 	console.log(encode(e.target.innerHTML));
+		// }
 		// if (e.key === 'CTRL' && e.shiftKey) {
 		// 	console.log(decode(e.target.innerHTML));
 		// }
@@ -104,9 +104,9 @@ const ChatTextArea = ({ channelId, channelName, user }) => {
 				</button>
 			</form>
 			<div className="chat__inputIcons">
-				<CardGiftcardIcon fontSize="default" />
-				<GifIcon fontSize="default" />
-				<EmojiEmotionsIcon fontSize="default" />
+				<CardGiftcardIcon />
+				<GifIcon />
+				<EmojiEmotionsIcon />
 			</div>
 		</div>
 	);

@@ -26,10 +26,10 @@ const SideBarChannel = ({ id, channelName }) => {
 					})
 				)
 			}>
-			<h4>
+			<div>
 				<span className="sidebarChannel__hash">#</span>
 				{channelName}
-			</h4>
+			</div>
 		</div>
 	);
 };

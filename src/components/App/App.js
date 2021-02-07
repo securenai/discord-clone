@@ -6,6 +6,7 @@ import Login from '../Login/Login';
 import { auth } from '../../firebase';
 import { login, logout } from '../../features/userSlice';
 import Channel from '../Channel/Channel';
+import { rtdb_and_local_fs_presence, fs_listen } from '../../utils/util';
 
 function App() {
 	const dispatch = useDispatch();
@@ -23,6 +24,8 @@ function App() {
 						displayName: authUser.displayName
 					})
 				);
+				rtdb_and_local_fs_presence(authUser);
+				fs_listen(authUser.uid);
 			} else {
 				dispatch(logout());
 			}

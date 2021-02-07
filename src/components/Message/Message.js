@@ -1,6 +1,13 @@
 import { Avatar } from '@material-ui/core';
 import React, { useState, useRef } from 'react';
-import { Msg, MsgInfo, MsgTimeStamp, MsgIsEdited } from './style';
+import {
+	Msg,
+	MsgInfo,
+	MsgTimeStamp,
+	MsgIsEdited,
+	MsgDisplayName,
+	MsgContent
+} from './style';
 import MessageOptions from './MessageOptions';
 import db from '../../firebase';
 import MessageEdit from './MessageEdit';
@@ -81,13 +88,13 @@ const Message = ({ timestamp, user, message, id, isEdited, channelId }) => {
 			<Avatar src={user.photo} />
 
 			<MsgInfo>
-				<h4>
-					<span>{user.displayName}</span>
+				<div>
+					<MsgDisplayName>{user.displayName}</MsgDisplayName>
 					<MsgTimeStamp>
 						{/* {new Date(timestamp?.toDate()).toLocaleString()} */}
 						{timestamp !== null ? timeStampConversion(timestamp) : ''}
 					</MsgTimeStamp>
-				</h4>
+				</div>
 				{currEditingMsg === id && openEdit === true ? (
 					<MessageEdit
 						editInput={text.current}
@@ -98,7 +105,7 @@ const Message = ({ timestamp, user, message, id, isEdited, channelId }) => {
 					/>
 				) : (
 					<div>
-						{message}
+						<MsgContent>{message}</MsgContent>
 						{isEdited === true ? (
 							<MsgIsEdited>
 								<span>(edited)</span>

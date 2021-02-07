@@ -1,7 +1,7 @@
 .sidebar {
 	display: flex;
 	flex-direction: column;
-	flex: 0.2;
+	/* flex: 0.2; */
 	height: 100vh;
 	background-color: #2f3135;
 }
@@ -10,10 +10,10 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding: 20px;
+	padding: 10px;
 	background-color: #2f3135;
 	color: white;
-	border-bottom: 1px solid #26282c;
+	border-bottom: 2px solid #26282c;
 }
 
 .sidebar__channels::-webkit-scrollbar {
@@ -87,11 +87,17 @@
 
 .sidebar__voiceIcons > .MuiSvgIcon-root {
 	padding: 10px;
+	cursor: pointer;
+}
+
+.sidebar__voiceIcons > .MuiSvgIcon-root:hover {
+	color: white;
 }
 
 .sidebar__profileInfo {
 	flex: 1;
 	padding: 10px;
+	cursor: pointer;
 }
 
 .sidebar__profileInfo > h3 {
@@ -100,4 +106,9 @@
 
 .sidebar__profileIcons > .MuiSvgIcon-root {
 	padding: 10px;
+	cursor: pointer;
+}
+
+.sidebar__profileIcons > .MuiSvgIcon-root:hover {
+	color: white;
 }

@@ -5,3 +5,11 @@
 	display: flex;
 	overflow: hidden;
 }
+.test {
+	display: flex;
+	flex-direction: row;
+}
+.main {
+	width: 80%;
+	height: 100vh;
+}

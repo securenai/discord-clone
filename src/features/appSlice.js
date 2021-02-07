@@ -7,6 +7,7 @@ export const appSlice = createSlice({
 		channelId: localStorage.getItem('lastVisitedChannelId') || defaultChannelId,
 		channelName:
 			localStorage.getItem('lastVisitedChannelName') || defaultChannelName,
+		members: null,
 		currMsgEditing: null,
 		currMsgDeleting: null
 	},
@@ -18,6 +19,7 @@ export const appSlice = createSlice({
 			// immutable state based off those changes
 			state.channelId = action.payload.channelId;
 			state.channelName = action.payload.channelName;
+			state.members = action.payload.members;
 		},
 		setMessageInfo: (state, action) => {
 			state.currMsgEditing = action.payload.currMsgEditing;
@@ -33,6 +35,7 @@ export const { setChannelInfo, setMessageInfo } = appSlice.actions;
 // in the slice file. For example: `useSelector((state) => state.app.value)`
 export const selectChannelId = (state) => state.app.channelId;
 export const selectChannelName = (state) => state.app.channelName;
+export const selectMembers = (state) => state.app.members;
 export const selectCurrMsgEditing = (state) => state.app.currMsgEditing;
 export const selectCurrMsgDeleting = (state) => state.app.currMsgDeleting;
 

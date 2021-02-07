@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import './Sidebar.css';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import AddIcon from '@material-ui/icons/Add';
@@ -6,13 +6,13 @@ import SideBarChannel from './SidebarChannel';
 import SignalCellularAltIcon from '@material-ui/icons/SignalCellularAlt';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import CallIcon from '@material-ui/icons/Call';
-import {Avatar} from '@material-ui/core';
+import { Avatar } from '@material-ui/core';
 import MicIcon from '@material-ui/icons/Mic';
 import HeadsetIcon from '@material-ui/icons/Headset';
 import SettingsIcon from '@material-ui/icons/Settings';
-import {useSelector} from 'react-redux';
-import {selectUser} from '../../features/userSlice';
-import db, {auth} from '../../firebase';
+import { useSelector } from 'react-redux';
+import { selectUser } from '../../features/userSlice';
+import db, { auth } from '../../firebase';
 import firebase from 'firebase';
 
 const Sidebar = () => {
@@ -26,7 +26,7 @@ const Sidebar = () => {
 				setChannels(
 					snapshot.docs.map((doc) => ({
 						id: doc.id,
-						channel: doc.data(),
+						channel: doc.data()
 					}))
 				)
 			);
@@ -37,7 +37,7 @@ const Sidebar = () => {
 		if (channelName) {
 			db.collection('channels').add({
 				channelName: channelName,
-				createdDateTime: firebase.firestore.FieldValue.serverTimestamp(),
+				createdDateTime: firebase.firestore.FieldValue.serverTimestamp()
 			});
 		}
 	};
@@ -45,7 +45,7 @@ const Sidebar = () => {
 	return (
 		<div className="sidebar">
 			<div className="sidebar__top">
-				<h3>Nova's Lab</h3>
+				<h4>Nova's Lab</h4>
 				<ExpandMoreIcon />
 			</div>
 
@@ -55,13 +55,10 @@ const Sidebar = () => {
 						<ExpandMoreIcon />
 						<h4>Text channels</h4>
 					</div>
-					<AddIcon
-						onClick={handleAddChannel}
-						className="sidebar__addChannel"
-					/>
+					<AddIcon onClick={handleAddChannel} className="sidebar__addChannel" />
 				</div>
 				<div className="sidebar__channelsList">
-					{channels.map(({id, channel}) => (
+					{channels.map(({ id, channel }) => (
 						<SideBarChannel
 							key={id}
 							id={id}

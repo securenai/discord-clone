@@ -6,8 +6,13 @@ import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 import SearchRoundedIcon from '@material-ui/icons/SearchRounded';
 import InboxIcon from '@material-ui/icons/Inbox';
 import HelpRoundedIcon from '@material-ui/icons/HelpRounded';
+import { useSelector } from 'react-redux';
+import { selectChannelId, selectChannelName } from '../../features/appSlice';
 
-const ChatHeader = ({ channelName, channelId }) => {
+const ChatHeader = () => {
+	const channelId = useSelector(selectChannelId);
+	const channelName = useSelector(selectChannelName);
+
 	useEffect(() => {
 		localStorage.setItem('lastVisitedChannelName', channelName);
 	});
@@ -17,7 +22,7 @@ const ChatHeader = ({ channelName, channelId }) => {
 			<div className="chatHeader__left">
 				<h3>
 					<span className="chatHeader__hash">#</span>
-					{channelName} - {channelId}
+					<span className="chatHeader__channel_name">{channelName}</span>
 				</h3>
 			</div>
 			<div className="chatHeader__right">

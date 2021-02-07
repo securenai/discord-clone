@@ -1,7 +1,9 @@
 import React from 'react';
 import Chat from '../Chat/Chat';
+import Members from '../Members/Members';
 import Sidebar from '../Sidebar/Sidebar';
 import './Channel.css';
+import ChatHeader from '../Chat/ChatHeader';
 
 const Channel = () => {
 	return (
@@ -9,7 +11,13 @@ const Channel = () => {
 			<div className="channel__main">
 				<>
 					<Sidebar />
-					<Chat />
+					<div className="main">
+						<ChatHeader />
+						<div className="test">
+							<Chat />
+							<Members />
+						</div>
+					</div>
 				</>
 			</div>
 		</div>
