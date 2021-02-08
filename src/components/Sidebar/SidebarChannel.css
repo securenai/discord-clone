@@ -8,7 +8,7 @@
 
 .sidebarChannel > div {
 	display: flex;
-	padding-left: 15px;
+	padding: 0px 10px;
 	align-items: center;
 	background-color: #2f3135;
 	color: gray;
@@ -21,9 +21,38 @@
 .sidebarChannel__hash {
 	font-size: 25px;
 	padding: 0px 8px;
+	flex-grow: 0;
+}
+
+.sidebarChannel__name {
+	flex-grow: 1;
 }
 
 .sidebarCurr > h4 {
 	background-color: #393c43;
 	color: white;
+}
+
+.sidebar__channelIcons {
+	flex-grow: auto;
+}
+
+.sidebar__channelIcons > .MuiSvgIcon-root {
+	font-size: 14px;
+}
+
+.sidebar__channelIcons > .MuiSvgIcon-root:hover {
+	color: white;
+}
+
+.sidebarChannel__wrap {
+	display: flex;
+}
+
+.sidebarChannel__wrap .sidebar__channelIcons {
+	display: none;
+}
+
+.sidebarChannel__wrap:hover .sidebar__channelIcons {
+	display: block;
 }

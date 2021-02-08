@@ -1,17 +1,30 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setChannelInfo } from '../../features/appSlice';
 import './SidebarChannel.css';
 import { useSelector } from 'react-redux';
 import { selectChannelId } from '../../features/appSlice';
+import SettingsIcon from '@material-ui/icons/Settings';
+import ChannelSettings from '../ChannelSettings/ChannelSettings';
 
 const SideBarChannel = ({ id, channelName }) => {
 	const dispatch = useDispatch();
 	const channelId = useSelector(selectChannelId);
+	const [openChannelSettings, setOpenChannelSettings] = useState(false);
 
 	useEffect(() => {
 		localStorage.setItem('lastVisitedChannelId', channelId);
 	});
+
+	const handleClickOpenSettings = (e) => {
+		e.stopPropagation();
+		setOpenChannelSettings(true);
+	};
+
+	const handleCloseSettings = (e) => {
+		e.stopPropagation();
+		setOpenChannelSettings(false);
+	};
 
 	return (
 		<div
@@ -26,9 +39,22 @@ const SideBarChannel = ({ id, channelName }) => {
 					})
 				)
 			}>
-			<div>
+			<div className="sidebarChannel__wrap">
 				<span className="sidebarChannel__hash">#</span>
-				{channelName}
+				<span className="sidebarChannel__name">{channelName}</span>
+				<span className="sidebar__channelIcons">
+					<SettingsIcon onClick={handleClickOpenSettings} />
+				</span>
+			</div>
+
+			<div>
+				{openChannelSettings === true ? (
+					<ChannelSettings
+						// isOpen={openChannelSettings}
+						// checked={true}
+						closeSettings={handleCloseSettings}
+					/>
+				) : null}
 			</div>
 		</div>
 	);
