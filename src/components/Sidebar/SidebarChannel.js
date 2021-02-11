@@ -7,7 +7,7 @@ import { selectChannelId } from '../../features/appSlice';
 import SettingsIcon from '@material-ui/icons/Settings';
 import ChannelSettings from '../ChannelSettings/ChannelSettings';
 
-const SideBarChannel = ({ id, channelName }) => {
+const SideBarChannel = ({ id, channelData }) => {
 	const dispatch = useDispatch();
 	const channelId = useSelector(selectChannelId);
 	const [openChannelSettings, setOpenChannelSettings] = useState(false);
@@ -35,13 +35,13 @@ const SideBarChannel = ({ id, channelName }) => {
 				dispatch(
 					setChannelInfo({
 						channelId: id,
-						channelName: channelName
+						channelName: channelData.channelName
 					})
 				)
 			}>
 			<div className="sidebarChannel__wrap">
 				<span className="sidebarChannel__hash">#</span>
-				<span className="sidebarChannel__name">{channelName}</span>
+				<span className="sidebarChannel__name">{channelData.channelName}</span>
 				<span className="sidebar__channelIcons">
 					<SettingsIcon onClick={handleClickOpenSettings} />
 				</span>
@@ -52,6 +52,8 @@ const SideBarChannel = ({ id, channelName }) => {
 					<ChannelSettings
 						// isOpen={openChannelSettings}
 						// checked={true}
+						channelData={channelData}
+						channelId={id}
 						closeSettings={handleCloseSettings}
 					/>
 				) : null}

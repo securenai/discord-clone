@@ -37,6 +37,9 @@ const Sidebar = () => {
 		if (channelName) {
 			db.collection('channels').add({
 				channelName: channelName,
+				channelTopic: '',
+				slowmode: 0,
+				nsfw: false,
 				createdDateTime: firebase.firestore.FieldValue.serverTimestamp()
 			});
 		}
@@ -59,11 +62,7 @@ const Sidebar = () => {
 				</div>
 				<div className="sidebar__channelsList">
 					{channels.map(({ id, channel }) => (
-						<SideBarChannel
-							key={id}
-							id={id}
-							channelName={channel.channelName}
-						/>
+						<SideBarChannel key={id} id={id} channelData={channel} />
 					))}
 				</div>
 			</div>

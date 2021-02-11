@@ -1,0 +1,118 @@
+.overview_title {
+	margin-bottom: 20px;
+	font-size: 16px;
+	line-height: 20px;
+	font-weight: 600;
+	text-transform: uppercase;
+	color: #fff;
+}
+.overview_field_title {
+	color: #8e9297;
+	margin-bottom: 8px;
+	font-size: 12px;
+	line-height: 16px;
+	font-weight: 600;
+	text-transform: uppercase;
+}
+.overview_input_1 {
+	padding-left: 10px;
+	padding-right: 10px;
+	height: 40px;
+	font-size: 16px;
+	width: 90%;
+	border-radius: 3px;
+	color: #dcddde;
+	outline: 0;
+	background-color: rgba(0, 0, 0, 0.1);
+	border: 1px solid rgba(0, 0, 0, 0.3);
+	transition: border-color 0.2s ease-in-out;
+}
+.overview_input_1:hover,
+.overview_textarea_1:hover {
+	border-color: #000000;
+}
+.overview_input_1:focus,
+.overview_textarea_1:focus {
+	border-color: #7289da;
+}
+.mt-20 {
+	margin-top: 20px;
+}
+.overview_input_wrapper {
+	display: flex;
+	flex-direction: column;
+}
+.overview_textarea_1 {
+	padding-right: 38.92px;
+	height: 84px;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 10px;
+	font-size: 15px;
+	width: 90%;
+	border-radius: 3px;
+	color: #dcddde;
+	outline: 0;
+	background-color: rgba(0, 0, 0, 0.1);
+	border: 1px solid rgba(0, 0, 0, 0.3);
+	transition: border-color 0.2s ease-in-out;
+	resize: none;
+	font-family: Arial, Helvetica, sans-serif;
+	overflow: hidden;
+}
+.textarea_maxLength {
+	position: absolute;
+	font-family: Consolas;
+	right: 30px;
+	top: 300px;
+	font-size: 12px;
+	pointer-events: none;
+	color: #72767d;
+	outline: 0;
+}
+.overview_divider {
+	width: 100%;
+	height: 1px;
+	border-top: thin solid hsla(0, 0%, 100%, 0.06);
+	margin-bottom: 40px;
+	margin-top: 40px;
+}
+.overview_slowmode_slider {
+	margin-left: 10px;
+}
+.overview_slowmode_description {
+	font-size: 14px;
+	line-height: 20px;
+	font-weight: 400;
+	color: #b9bbbe;
+}
+.overview_label_description {
+	margin-top: 8px;
+}
+.overview_label_title {
+	color: #fff;
+}
+.overview_label_description {
+	font-size: 14px;
+	line-height: 20px;
+	font-weight: 400;
+	color: #b9bbbe;
+}
+.overview_image_wrapper {
+	margin-top: 60px;
+	display: flex;
+	justify-content: center;
+}
+.overview_container {
+	padding-bottom: 80px;
+}
+.overview_label {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-self: center;
+}
+.overview_switch {
+	align-self: flex-end;
+	margin-bottom: 5px;
+}
