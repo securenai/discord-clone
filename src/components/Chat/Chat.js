@@ -2,7 +2,10 @@ import React, { useState, useEffect } from 'react';
 import './Chat.css';
 import ChatTextArea from './ChatTextArea';
 import { useSelector } from 'react-redux';
-import { selectChannelId, selectChannelName } from '../../features/appSlice';
+import {
+	selectChannelId,
+	selectChannelName
+} from '../../features/channelSlice';
 import { selectUser } from '../../features/userSlice';
 import db from '../../firebase';
 

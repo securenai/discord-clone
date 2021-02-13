@@ -1,21 +1,17 @@
 import React from 'react';
 import Switch from '@material-ui/core/Switch';
 
-export default function CustomSwitch() {
-	const [state, setState] = React.useState({
-		checkedA: false
-	});
-
+export default function CustomSwitch({ toggledSwitch, changeNsfw }) {
 	const handleChange = (event) => {
-		setState({ ...state, [event.target.name]: event.target.checked });
+		changeNsfw();
 	};
 
 	return (
 		<div>
 			<Switch
-				checked={state.checkedA}
+				checked={toggledSwitch}
 				onChange={handleChange}
-				name="checkedA"
+				name="checked"
 				color="default"
 				inputProps={{ 'aria-label': 'secondary checkbox' }}
 			/>

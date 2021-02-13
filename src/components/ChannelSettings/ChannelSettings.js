@@ -4,18 +4,24 @@ import './ChannelSettings.css';
 import Zoom from '@material-ui/core/Zoom';
 import Overview from './Overview';
 import Permissions from './Permissions';
+import ChannelDelete from '../Channel/ChannelDelete';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
 	return <Zoom ref={ref} {...props} style={{ transitionDelay: '0ms' }} />;
 });
 
-const ChannelSettings = ({ closeSettings, channelData }) => {
+const ChannelSettings = ({ channelId, closeSettings, channelData }) => {
 	const [tab, setTab] = useState(1);
+	const [openDelete, setOpenDelete] = useState(false);
+
+	const handleCloseDeletePopup = () => {
+		setOpenDelete(false);
+	};
 
 	const getTab = () => {
 		switch (tab) {
 			case 1:
-				return <Overview channelData={channelData} />;
+				return <Overview channelData={channelData} channelId={channelId} />;
 			case 2:
 				return <Permissions />;
 			case 3:
@@ -40,7 +46,7 @@ const ChannelSettings = ({ closeSettings, channelData }) => {
 							<div className="channel__settings_sidebar_nav_side">
 								<div className="channel__settings_sidebar_nav_side_header">
 									<span>
-										# channel name_
+										# {channelData.channelName + ' '}
 										<span className="channel__settings_sidebar_nav_side_category">
 											Text Channels
 										</span>
@@ -67,7 +73,9 @@ const ChannelSettings = ({ closeSettings, channelData }) => {
 									Integrations
 								</div>
 								<div className="channel__settings_sidebar_nav_side_separator"></div>
-								<div className="channel__settings_sidebar_nav_side_item item_del">
+								<div
+									className="channel__settings_sidebar_nav_side_item item_del"
+									onClick={() => setOpenDelete(true)}>
 									Delete Channel
 								</div>
 							</div>
@@ -103,6 +111,16 @@ const ChannelSettings = ({ closeSettings, channelData }) => {
 					</div>
 				</div>
 			</Dialog>
+
+			<div>
+				{openDelete === true ? (
+					<ChannelDelete
+						closeDelete={handleCloseDeletePopup}
+						channelName={channelData.channelName}
+						channelId={channelId}
+					/>
+				) : null}
+			</div>
 		</div>
 	);
 };

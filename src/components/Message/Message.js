@@ -13,7 +13,10 @@ import db from '../../firebase';
 import MessageEdit from './MessageEdit';
 import MessageDelete from './MessageDelete';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectCurrMsgEditing, setMessageInfo } from '../../features/appSlice';
+import {
+	selectCurrMsgEditing,
+	setMessageInfo
+} from '../../features/messageSlice';
 import { timeStampConversion } from '../../utils/util';
 import { decode } from 'html-entities';
 
@@ -26,7 +29,6 @@ const Message = ({ timestamp, user, message, id, isEdited, channelId }) => {
 	// const [editInput, setEditInput] = useState('');
 	const [showMsgOpt, setShowMsgOpt] = useState(false);
 	// const d = new Date(timestamp.toDate());
-	// console.log(typeof d);
 	// debugger;
 	const handleOpenMsgEdit = (msgId) => {
 		dispatch(
@@ -48,7 +50,6 @@ const Message = ({ timestamp, user, message, id, isEdited, channelId }) => {
 	};
 
 	const handleSaveEditedMessage = (msgId) => {
-		console.log(text);
 		if (text.current.trim() === '') return;
 		const notEdited = message === text.current.trim();
 		const sendData =
@@ -66,7 +67,6 @@ const Message = ({ timestamp, user, message, id, isEdited, channelId }) => {
 	};
 
 	const handleCloseEditingMode = () => {
-		console.log('close edit');
 		dispatch(
 			setMessageInfo({
 				currMsgEditing: null

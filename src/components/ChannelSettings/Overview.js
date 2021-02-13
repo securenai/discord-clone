@@ -8,9 +8,14 @@ const Overview = ({ channelData }) => {
 	const [channelName, setChannelName] = useState(channelData.channelName);
 	const [channelTopic, setChannelTopic] = useState(channelData.channelTopic);
 	const [channelSlowmode, setChannelSlowmode] = useState(channelData.slowmode);
+	const [nsfwSwitch, setNsfwSwitch] = useState(channelData.nsfw);
 
 	const handleChangeSlowmode = (val) => {
 		setChannelSlowmode(val);
+	};
+
+	const handleChangeNsfw = () => {
+		setNsfwSwitch(!nsfwSwitch);
 	};
 
 	return (
@@ -60,7 +65,10 @@ const Overview = ({ channelData }) => {
 			<div className="overview_label">
 				<label className="overview_label_title">NSFW Channel</label>
 				<div className="overview_switch">
-					<CustomSwitch />
+					<CustomSwitch
+						toggledSwitch={nsfwSwitch}
+						changeNsfw={handleChangeNsfw}
+					/>
 				</div>
 			</div>
 			<div className="overview_label_description">

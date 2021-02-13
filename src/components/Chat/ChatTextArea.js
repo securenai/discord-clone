@@ -33,23 +33,10 @@ const ChatTextArea = ({ channelId, channelName, user }) => {
 			e.preventDefault();
 			btnRef.current.click();
 		}
-		// if (e.key === 'Enter' && e.shiftKey) {
-		// 	console.log(decode(e.target.innerHTML));
-		// 	console.log('-------------------------');
-		// 	console.log(encode(e.target.innerHTML));
-		// }
-		// if (e.key === 'CTRL' && e.shiftKey) {
-		// 	console.log(decode(e.target.innerHTML));
-		// }
-		// if (e.key === 'CTRL' && !e.shiftKey) {
-		// 	e.preventDefault();
-		// 	btnRef.current.click();
-		// }
 	};
 
 	const handleChange = (e) => {
 		text.current = decode(e.target.value);
-		// console.log(text.current);
 		const draftStore = localStorage.getItem('DraftStore');
 		if (draftStore) {
 			const updatedStore = (JSON.parse(draftStore).state.channelId = {

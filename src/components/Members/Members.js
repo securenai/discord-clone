@@ -6,7 +6,7 @@ import {
 	MemberName,
 	MemberTitle
 } from './style';
-import { selectChannelId } from '../../features/appSlice';
+import { selectChannelId } from '../../features/channelSlice';
 import { Avatar } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import db from '../../firebase';
@@ -17,14 +17,12 @@ const Members = () => {
 
 	useEffect(() => {
 		if (channelId) {
-			// console.log('cid');
 			db.collection('users').onSnapshot((snapshot) =>
 				setMembers(
 					snapshot.docs.map((doc) => ({ id: doc.id, data: doc.data() }))
 				)
 			);
 		}
-		// console.log(members);
 	}, [channelId]);
 
 	return (

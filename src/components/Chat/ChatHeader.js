@@ -7,14 +7,14 @@ import SearchRoundedIcon from '@material-ui/icons/SearchRounded';
 import InboxIcon from '@material-ui/icons/Inbox';
 import HelpRoundedIcon from '@material-ui/icons/HelpRounded';
 import { useSelector } from 'react-redux';
-import { selectChannelName } from '../../features/appSlice';
+import { selectChannelName } from '../../features/channelSlice';
 
 const ChatHeader = () => {
 	const channelName = useSelector(selectChannelName);
 
 	useEffect(() => {
 		localStorage.setItem('lastVisitedChannelName', channelName);
-	});
+	}, [channelName]);
 
 	return (
 		<div className="chatHeader">

@@ -8,7 +8,6 @@ export const timeStampConversion = (timestamp) => {
 	const isYest = d2.toDateString() === timestamp.toDate().toDateString();
 	const d = new Date(timestamp?.toDate()).toLocaleString();
 	const arr = d.split(' ');
-	// console.log(arr);
 	if (isToday) {
 		return `今天 ${arr[1]}`;
 	} else if (isYest) {
@@ -94,7 +93,6 @@ export const fs_listen = (uid) => {
 		userStatusFirestoreRef.onSnapshot(function (doc) {
 			if (doc.data() === null) {
 				var isOnline = doc.data().state === 'online';
-				console.log(isOnline);
 			}
 		});
 	}

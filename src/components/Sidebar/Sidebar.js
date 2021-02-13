@@ -10,14 +10,38 @@ import { Avatar } from '@material-ui/core';
 import MicIcon from '@material-ui/icons/Mic';
 import HeadsetIcon from '@material-ui/icons/Headset';
 import SettingsIcon from '@material-ui/icons/Settings';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from '../../features/userSlice';
+import { selectChannels, setAppInfo } from '../../features/appSlice';
 import db, { auth } from '../../firebase';
 import firebase from 'firebase';
 
 const Sidebar = () => {
+	const dispatch = useDispatch();
 	const user = useSelector(selectUser);
+	// const channels = useSelector(selectChannels);
 	const [channels, setChannels] = useState([]);
+
+	// useEffect(() => {
+	// 	db.collection('channels')
+	// 		.orderBy('createdDateTime', 'asc')
+	// 		.onSnapshot((snapshot) =>
+	// 			dispatch(
+	// 				setAppInfo({
+	// 					channels: snapshot.docs.map((doc) => ({
+	// 						id: doc.id,
+	// 						// channel: doc.data()
+	// 						channel: {
+	// 							channelName: doc.data().channelName,
+	// 							channelTopic: doc.data().channelTopic,
+	// 							slowmode: doc.data().slowmode,
+	// 							nsfw: doc.data().nsfw
+	// 						}
+	// 					}))
+	// 				})
+	// 			)
+	// 		);
+	// }, []);
 
 	useEffect(() => {
 		db.collection('channels')

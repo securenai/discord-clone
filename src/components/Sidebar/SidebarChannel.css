@@ -6,7 +6,20 @@
 	background-color: #34373c;
 }
 
-.sidebarChannel > div {
+.curr_channel {
+	color: white;
+	background-color: #34373c;
+	border-radius: 10px;
+	font-size: 16px;
+	font-weight: 500;
+	padding: 0px 10px;
+	display: flex;
+	padding: 0px 10px;
+	align-items: center;
+	cursor: pointer;
+}
+
+.sidebarChannel__wrap {
 	display: flex;
 	padding: 0px 10px;
 	align-items: center;
@@ -38,7 +51,7 @@
 }
 
 .sidebar__channelIcons > .MuiSvgIcon-root {
-	font-size: 14px;
+	font-size: 15px;
 }
 
 .sidebar__channelIcons > .MuiSvgIcon-root:hover {
