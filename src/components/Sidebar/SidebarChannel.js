@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { setWindowInfo } from '../../features/windowSlice';
 import { setChannelInfo } from '../../features/channelSlice';
 import './SidebarChannel.css';
 import { useSelector } from 'react-redux';
@@ -8,7 +9,7 @@ import {
 	selectChannelName,
 	selectCurrChannelConfiguring
 } from '../../features/channelSlice';
-import { selectOpenChannelSettings, setAppInfo } from '../../features/appSlice';
+import { selectOpenChannelSettings } from '../../features/windowSlice';
 import SettingsIcon from '@material-ui/icons/Settings';
 import ChannelSettings from '../ChannelSettings/ChannelSettings';
 
@@ -17,8 +18,10 @@ const SideBarChannel = ({ id, channelData }) => {
 	const channelId = useSelector(selectChannelId);
 	const channelName = useSelector(selectChannelName);
 	const currChannelConfiguring = useSelector(selectCurrChannelConfiguring);
-	// const openChannelSettings = useSelector(selectOpenChannelSettings);
-	const [openChannelSettings, setOpenChannelSettings] = useState(false);
+
+	// console.log(currChannelConfiguring);
+	const openChannelSettings = useSelector(selectOpenChannelSettings);
+	// const [openChannelSettings, setOpenChannelSettings] = useState(false);
 
 	useEffect(() => {
 		localStorage.setItem('lastVisitedChannelId', channelId);
@@ -26,29 +29,29 @@ const SideBarChannel = ({ id, channelData }) => {
 
 	const handleClickOpenSettings = (e) => {
 		e.stopPropagation();
-		setOpenChannelSettings(true);
-		// dispatch(setAppInfo({ openChannelSettings: true }));
+		// setOpenChannelSettings(true);
+		dispatch(setWindowInfo({ openChannelSettings: id }));
 
-		// dispatch(
-		// 	setChannelInfo({
-		// 		channelId: channelId,
-		// 		channelName: channelName,
-		// 		currChannelConfiguring: id
-		// 	})
-		// );
+		dispatch(
+			setChannelInfo({
+				channelId: channelId,
+				channelName: channelName,
+				currChannelConfiguring: id
+			})
+		);
 	};
 
 	const handleCloseSettings = (e) => {
 		e.stopPropagation();
-		setOpenChannelSettings(false);
-		// dispatch(
-		// 	setChannelInfo({
-		// 		channelId: channelId,
-		// 		channelName: channelName,
-		// 		currChannelConfiguring: null
-		// 	})
-		// );
-		// dispatch(setAppInfo({ openChannelSettings: false }));
+		// setOpenChannelSettings(false);
+		dispatch(setWindowInfo({ openChannelSettings: null }));
+		dispatch(
+			setChannelInfo({
+				channelId: channelId,
+				channelName: channelName,
+				currChannelConfiguring: null
+			})
+		);
 	};
 
 	return (
@@ -81,7 +84,7 @@ const SideBarChannel = ({ id, channelData }) => {
 			</div>
 
 			<div>
-				{openChannelSettings === true ? (
+				{openChannelSettings === id ? (
 					<ChannelSettings
 						// isOpen={openChannelSettings}
 						// checked={true}

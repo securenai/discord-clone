@@ -4,7 +4,7 @@ import SlowmodeSlider from './SlowmodeSlider';
 import overviewsvg from '../../images/overview_img.svg';
 import CustomSwitch from './CustomSwitch';
 
-const Overview = ({ channelData }) => {
+const Overview = ({ channelData, openSave, closeSave }) => {
 	const [channelName, setChannelName] = useState(channelData.channelName);
 	const [channelTopic, setChannelTopic] = useState(channelData.channelTopic);
 	const [channelSlowmode, setChannelSlowmode] = useState(channelData.slowmode);
@@ -16,6 +16,10 @@ const Overview = ({ channelData }) => {
 
 	const handleChangeNsfw = () => {
 		setNsfwSwitch(!nsfwSwitch);
+	};
+	const checkOpenSave = () => {
+		console.log('open');
+		openSave();
 	};
 
 	return (
@@ -41,6 +45,7 @@ const Overview = ({ channelData }) => {
 					value={channelTopic}
 					onChange={(e) => {
 						setChannelTopic(e.target.value);
+						checkOpenSave();
 					}}
 					type="text"
 					placeholder="Let everyone know how to use this channel!"

@@ -19,42 +19,43 @@ import firebase from 'firebase';
 const Sidebar = () => {
 	const dispatch = useDispatch();
 	const user = useSelector(selectUser);
-	// const channels = useSelector(selectChannels);
-	const [channels, setChannels] = useState([]);
-
-	// useEffect(() => {
-	// 	db.collection('channels')
-	// 		.orderBy('createdDateTime', 'asc')
-	// 		.onSnapshot((snapshot) =>
-	// 			dispatch(
-	// 				setAppInfo({
-	// 					channels: snapshot.docs.map((doc) => ({
-	// 						id: doc.id,
-	// 						// channel: doc.data()
-	// 						channel: {
-	// 							channelName: doc.data().channelName,
-	// 							channelTopic: doc.data().channelTopic,
-	// 							slowmode: doc.data().slowmode,
-	// 							nsfw: doc.data().nsfw
-	// 						}
-	// 					}))
-	// 				})
-	// 			)
-	// 		);
-	// }, []);
+	const channels = useSelector(selectChannels);
+	// const [channels, setChannels] = useState([]);
 
 	useEffect(() => {
 		db.collection('channels')
 			.orderBy('createdDateTime', 'asc')
 			.onSnapshot((snapshot) =>
-				setChannels(
-					snapshot.docs.map((doc) => ({
-						id: doc.id,
-						channel: doc.data()
-					}))
+				dispatch(
+					setAppInfo({
+						channels: snapshot.docs.map((doc) => ({
+							id: doc.id,
+							// channel: doc.data()
+							channel: {
+								channelName: doc.data().channelName,
+								channelTopic: doc.data().channelTopic,
+								slowmode: doc.data().slowmode,
+								nsfw: doc.data().nsfw
+							}
+						}))
+					})
 				)
 			);
+		console.log(channels);
 	}, []);
+
+	// useEffect(() => {
+	// 	db.collection('channels')
+	// 		.orderBy('createdDateTime', 'asc')
+	// 		.onSnapshot((snapshot) =>
+	// 			setChannels(
+	// 				snapshot.docs.map((doc) => ({
+	// 					id: doc.id,
+	// 					channel: doc.data()
+	// 				}))
+	// 			)
+	// 		);
+	// }, []);
 
 	const handleAddChannel = () => {
 		const channelName = prompt('create channel name:');

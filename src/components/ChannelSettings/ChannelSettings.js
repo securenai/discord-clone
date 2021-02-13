@@ -5,14 +5,26 @@ import Zoom from '@material-ui/core/Zoom';
 import Overview from './Overview';
 import Permissions from './Permissions';
 import ChannelDelete from '../Channel/ChannelDelete';
+import ChannelSettingsSave from './ChannelSettingsSave';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
 	return <Zoom ref={ref} {...props} style={{ transitionDelay: '0ms' }} />;
 });
 
 const ChannelSettings = ({ channelId, closeSettings, channelData }) => {
+	// console.log(channelData);
+
 	const [tab, setTab] = useState(1);
 	const [openDelete, setOpenDelete] = useState(false);
+	const [openSave, setOpenSave] = React.useState(false);
+
+	const handleSaveOpen = () => {
+		setOpenSave(true);
+	};
+
+	const handleSaveClose = () => {
+		setOpenSave(false);
+	};
 
 	const handleCloseDeletePopup = () => {
 		setOpenDelete(false);
@@ -21,7 +33,14 @@ const ChannelSettings = ({ channelId, closeSettings, channelData }) => {
 	const getTab = () => {
 		switch (tab) {
 			case 1:
-				return <Overview channelData={channelData} channelId={channelId} />;
+				return (
+					<Overview
+						channelData={channelData}
+						channelId={channelId}
+						openSave={handleSaveOpen}
+						closeSave={handleSaveClose}
+					/>
+				);
 			case 2:
 				return <Permissions />;
 			case 3:
@@ -106,6 +125,16 @@ const ChannelSettings = ({ channelId, closeSettings, channelData }) => {
 										ESC
 									</div>
 								</div>
+							</div>
+							<div className="channel__settings_save_wrapper">
+								{/* {openSave === true ? (
+										<ChannelSettingsSave closeSave={handleSaveClose} />
+									) : null} */}
+								<ChannelSettingsSave
+									closeSave={handleSaveClose}
+									openSave={openSave}
+									channelData={channelData}
+								/>
 							</div>
 						</div>
 					</div>

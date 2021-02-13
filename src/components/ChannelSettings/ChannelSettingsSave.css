@@ -1,0 +1,19 @@
+.notify_change {
+	height: 50px;
+	/* background-color: rgba(34, 37, 39, 0.9); */
+	padding-left: 10px;
+	padding-top: 10px;
+	display: flex;
+	justify-content: space-around;
+}
+.notify_change_text {
+	color: white;
+	align-self: center;
+}
+.notify_change_btn {
+	background-color: aquamarine;
+	align-self: center;
+}
+.paper {
+	width: 100%;
+}

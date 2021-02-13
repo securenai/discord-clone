@@ -4,6 +4,7 @@ import appReducer from '../features/appSlice';
 import channelReducer from '../features/channelSlice';
 import messageReducer from '../features/messageSlice';
 import memberReducer from '../features/memberSlice';
+import windowReducer from '../features/windowSlice';
 
 // const serializableMiddleware = getDefaultMiddleware({
 // 	serializableCheck: false
@@ -15,7 +16,8 @@ export default configureStore({
 		app: appReducer,
 		channel: channelReducer,
 		message: messageReducer,
-		member: memberReducer
+		member: memberReducer,
+		window: windowReducer
 	} //,
 	//middleware: serializableMiddleware
 });

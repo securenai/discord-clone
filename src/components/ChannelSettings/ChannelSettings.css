@@ -1,9 +1,12 @@
+.MuiDialog-paperFullScreen {
+	overflow: hidden !important;
+}
 .channel__settings_container {
 	background-color: #2f3136;
 }
-.test {
+/* .test {
 	background-color: #2f3136;
-}
+} */
 .channel__settings_dialog {
 	background-color: #2f3136;
 	flex-direction: row;
@@ -141,4 +144,23 @@
 }
 .close_svg {
 	margin-top: 7px;
+}
+.channel__settings_save_wrapper {
+	position: absolute;
+	bottom: 10px;
+	width: 70%;
+	height: 80px;
+	margin-left: 20px;
+	display: flex;
+	justify-content: center;
+}
+.makeStyles-wrapper-12 {
+	width: 75% !important;
+	max-width: 750px !important;
+}
+.makeStyles-root-11 {
+	width: 100% !important;
+}
+.MuiPaper-rounded {
+	background-color: rgba(34, 37, 39, 0.9) !important;
 }

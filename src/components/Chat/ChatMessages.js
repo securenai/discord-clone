@@ -18,7 +18,7 @@ const ChatMessages = ({ channelId, channelName, messages }) => {
 	return (
 		<div className="chat__messages">
 			<div className="chat__chatStartPoint_section">
-				<ChatStartPoint channelName={channelName} />
+				<ChatStartPoint channelId={channelId} channelName={channelName} />
 			</div>
 			{messages.map((message) => {
 				return (
