@@ -8,6 +8,7 @@ import {
 } from '../../features/channelSlice';
 import { selectUser } from '../../features/userSlice';
 import db from '../../firebase';
+import ChatEmojiPicker from './ChatEmojiPicker';
 
 import ChatMessages from './ChatMessages';
 
@@ -16,6 +17,17 @@ const Chat = () => {
 	const channelId = useSelector(selectChannelId);
 	const channelName = useSelector(selectChannelName);
 	const [messages, setMessages] = useState([]);
+	const [openEmojiPicker, setOpenEmojiPicker] = useState(false);
+	const [emojiSelected, setEmojiSelected] = useState({});
+
+	const handleOpenEmojiPicker = () => {
+		setOpenEmojiPicker(!openEmojiPicker);
+	};
+
+	const handleSetEmojiSelected = (emoji) => {
+		// console.log(emoji);
+		setEmojiSelected(emoji);
+	};
 
 	useEffect(() => {
 		if (channelId) {
@@ -43,7 +55,15 @@ const Chat = () => {
 				channelName={channelName}
 				channelId={channelId}
 				user={user}
+				openEmojiPicker={handleOpenEmojiPicker}
+				emojiSelected={emojiSelected}
 			/>
+
+			<div>
+				{openEmojiPicker === true ? (
+					<ChatEmojiPicker setEmojiSelected={handleSetEmojiSelected} />
+				) : null}
+			</div>
 		</div>
 	);
 };

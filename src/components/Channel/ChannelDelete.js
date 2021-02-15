@@ -6,7 +6,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { useDispatch, useSelector } from 'react-redux';
 import { setChannelInfo } from '../../features/channelSlice';
-import { selectChannels } from '../../features/appSlice';
+// import { selectChannels } from '../../features/appSlice';
 import {
 	selectChannelId,
 	selectChannelName,
@@ -22,13 +22,12 @@ import {
 } from './style';
 
 const ChannelDelete = ({ channelId, channelName, closeDelete }) => {
-	const channels = useSelector(selectChannels);
+	// const channels = useSelector(selectChannels);
 	const currentChattingChannel = useSelector(selectChannelId);
 	const currentChattingName = useSelector(selectChannelName);
 	const currChannelConfiguring = useSelector(selectCurrChannelConfiguring);
 	const dispatch = useDispatch();
-	const handleMessageDelete = () => {
-		console.log(channels);
+	const handleChannelDelete = () => {
 		db.collection('channels').doc(channelId).delete();
 		if (currentChattingChannel === currChannelConfiguring) {
 			dispatch(
@@ -71,7 +70,7 @@ const ChannelDelete = ({ channelId, channelName, closeDelete }) => {
 						<Button onClick={closeDelete} color="primary">
 							<ChnDelBtn>Cancel</ChnDelBtn>
 						</Button>
-						<Button onClick={handleMessageDelete} color="primary" autoFocus>
+						<Button onClick={handleChannelDelete} color="primary" autoFocus>
 							<ChnDelBtn>Delete</ChnDelBtn>
 						</Button>
 					</DialogActions>

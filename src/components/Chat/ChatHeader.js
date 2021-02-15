@@ -9,7 +9,7 @@ import HelpRoundedIcon from '@material-ui/icons/HelpRounded';
 import { useSelector } from 'react-redux';
 import { selectChannelName } from '../../features/channelSlice';
 
-const ChatHeader = () => {
+const ChatHeader = ({ toggleShowMembers }) => {
 	const channelName = useSelector(selectChannelName);
 
 	useEffect(() => {
@@ -27,7 +27,7 @@ const ChatHeader = () => {
 			<div className="chatHeader__right">
 				<NotificationsIcon />
 				<EditLocationIcon />
-				<PeopleAltIcon />
+				<PeopleAltIcon onClick={toggleShowMembers} />
 				<div className="chatHeader__search">
 					<input placeholder="Search" />
 					<SearchRoundedIcon />

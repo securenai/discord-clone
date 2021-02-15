@@ -1,26 +1,55 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Overview.css';
 import SlowmodeSlider from './SlowmodeSlider';
 import overviewsvg from '../../images/overview_img.svg';
 import CustomSwitch from './CustomSwitch';
 
-const Overview = ({ channelData, openSave, closeSave }) => {
+const Overview = ({
+	channelData,
+	openSave,
+	closeSave,
+	saveData,
+	resetData
+}) => {
 	const [channelName, setChannelName] = useState(channelData.channelName);
 	const [channelTopic, setChannelTopic] = useState(channelData.channelTopic);
-	const [channelSlowmode, setChannelSlowmode] = useState(channelData.slowmode);
-	const [nsfwSwitch, setNsfwSwitch] = useState(channelData.nsfw);
+	const [slowmode, setSlowmode] = useState(channelData.slowmode);
+	const [nsfw, setNsfw] = useState(channelData.nsfw);
+
+	useEffect(() => {
+		// console.log(channelData);
+		if (resetData === true) {
+			setChannelName(channelData.channelName);
+			setChannelTopic(channelData.channelTopic);
+			setSlowmode(channelData.slowmode);
+			setNsfw(channelData.nsfw);
+		}
+		if (
+			channelData.channelName !== channelName ||
+			channelData.channelTopic !== channelTopic ||
+			channelData.slowmode !== slowmode ||
+			channelData.nsfw !== nsfw
+		) {
+			saveData({ channelName, channelTopic, slowmode, nsfw });
+			openSave();
+		} else {
+			closeSave();
+		}
+		// console.log(overviewData);
+	}, [channelName, channelTopic, slowmode, nsfw, resetData]);
 
 	const handleChangeSlowmode = (val) => {
-		setChannelSlowmode(val);
+		setSlowmode(val);
 	};
 
 	const handleChangeNsfw = () => {
-		setNsfwSwitch(!nsfwSwitch);
+		setNsfw(!nsfw);
 	};
 	const checkOpenSave = () => {
-		console.log('open');
 		openSave();
 	};
+
+	// console.log(channelData);
 
 	return (
 		<div className="overview_container">
@@ -58,7 +87,7 @@ const Overview = ({ channelData, openSave, closeSave }) => {
 			<h5 className="overview_field_title mt-20">slowmode</h5>
 			<div className="overview_slowmode_slider">
 				<SlowmodeSlider
-					slowmodeValue={channelSlowmode}
+					slowmodeValue={slowmode}
 					changeSlowmode={handleChangeSlowmode}
 				/>
 			</div>
@@ -70,10 +99,7 @@ const Overview = ({ channelData, openSave, closeSave }) => {
 			<div className="overview_label">
 				<label className="overview_label_title">NSFW Channel</label>
 				<div className="overview_switch">
-					<CustomSwitch
-						toggledSwitch={nsfwSwitch}
-						changeNsfw={handleChangeNsfw}
-					/>
+					<CustomSwitch toggledSwitch={nsfw} changeNsfw={handleChangeNsfw} />
 				</div>
 			</div>
 			<div className="overview_label_description">

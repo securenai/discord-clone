@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setWindowInfo } from '../../features/windowSlice';
 import { setChannelInfo } from '../../features/channelSlice';
@@ -6,8 +6,7 @@ import './SidebarChannel.css';
 import { useSelector } from 'react-redux';
 import {
 	selectChannelId,
-	selectChannelName,
-	selectCurrChannelConfiguring
+	selectChannelName
 } from '../../features/channelSlice';
 import { selectOpenChannelSettings } from '../../features/windowSlice';
 import SettingsIcon from '@material-ui/icons/Settings';
@@ -17,7 +16,7 @@ const SideBarChannel = ({ id, channelData }) => {
 	const dispatch = useDispatch();
 	const channelId = useSelector(selectChannelId);
 	const channelName = useSelector(selectChannelName);
-	const currChannelConfiguring = useSelector(selectCurrChannelConfiguring);
+	// const currChannelConfiguring = useSelector(selectCurrChannelConfiguring);
 
 	// console.log(currChannelConfiguring);
 	const openChannelSettings = useSelector(selectOpenChannelSettings);

@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-/************** MessageDelete  **************/
 export const ChnDelDialog = styled.div`
 	background-color: #36393f;
 	border-radius: 5px;
@@ -61,4 +60,57 @@ export const ChnDelBtnActions = styled.div`
 
 export const ChnDelBtn = styled.div`
 	color: white;
+`;
+
+export const ChnCreateInput = styled.div`
+	display: flex;
+
+	padding-left: 10px;
+	padding-right: 10px;
+	height: 40px;
+	font-size: 16px;
+	width: 90%;
+	border-radius: 3px;
+	color: #dcddde;
+	outline: 0;
+	background-color: rgba(0, 0, 0, 0.1);
+	border: 1px solid rgba(0, 0, 0, 0.3);
+	transition: border-color 0.2s ease-in-out;
+	&:hover {
+		border-color: #000000;
+	}
+	&:focus {
+		border-color: #7289da;
+	}
+`;
+
+export const ChnCreateTitle = styled.h5`
+	color: #8e9297;
+	margin-bottom: 8px;
+	font-size: 12px;
+	line-height: 16px;
+	font-weight: 600;
+	text-transform: uppercase;
+`;
+
+export const ChnCreateDialogTitle = styled.span`
+	color: white;
+	font-size: 20px;
+	font-weight: 900;
+	text-align: center;
+`;
+
+export const ChnCreateInputField = styled.input`
+	background: transparent;
+	outline-width: 0;
+	color: white;
+	border: none;
+	font-size: 16px;
+	width: 100%;
+`;
+
+export const ChnCreateInputHash = styled.div`
+	align-self: center;
+	font-size: 24px;
+	padding-right: 5px;
 `;

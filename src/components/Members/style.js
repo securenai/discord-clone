@@ -10,18 +10,21 @@ export const MemberContainer = styled.div`
 export const MemberCard = styled.div`
 	margin-left: 5px;
 	display: flex;
+	justify-content: center;
 	flex-direction: column;
-	width: 150px;
+	width: 150px !important;
 	height: 50px;
 	flex-wrap: wrap;
 	color: white;
 `;
 
 export const ProfilePic = styled.div`
-	width: 0;
+	width: 40px;
 `;
 
-export const MemberName = styled.div``;
+export const MemberName = styled.div`
+	margin-left: 10px;
+`;
 
 export const MemberTitle = styled.div`
 	height: 30px;

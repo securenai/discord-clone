@@ -8,10 +8,23 @@ import { decode } from 'html-entities';
 import firebase from 'firebase';
 import db from '../../firebase';
 
-const ChatTextArea = ({ channelId, channelName, user }) => {
+const ChatTextArea = ({
+	channelId,
+	channelName,
+	user,
+	openEmojiPicker,
+	emojiSelected
+}) => {
 	const text = useRef('');
 	const formRef = useRef(null);
 	const btnRef = useRef(null);
+
+	console.log(emojiSelected);
+	useEffect(() => {
+		console.log(text.current);
+		console.log(emojiSelected.native);
+		text.current = text.current + emojiSelected.native;
+	}, [emojiSelected]);
 
 	useEffect(() => {
 		formRef.current.children[0].focus();
@@ -84,8 +97,13 @@ const ChatTextArea = ({ channelId, channelName, user }) => {
 					disabled={false}
 					onChange={(e) => handleChange(e)}
 					onKeyPress={handleKeyPress}
-					placeholder={`Message`}
-				/>
+					placeholder={`Message`}>
+					{/* <span
+						contentEditable={false}
+						dangerouslySetInnerHTML={{
+							__html: emojiSelected
+						}}></span> */}
+				</ContentEditable>
 				<button className="msg_submit" onClick={submit} ref={btnRef}>
 					submit
 				</button>
@@ -93,7 +111,7 @@ const ChatTextArea = ({ channelId, channelName, user }) => {
 			<div className="chat__inputIcons">
 				<CardGiftcardIcon />
 				<GifIcon />
-				<EmojiEmotionsIcon />
+				<EmojiEmotionsIcon onClick={openEmojiPicker} />
 			</div>
 		</div>
 	);

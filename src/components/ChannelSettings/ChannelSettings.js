@@ -17,6 +17,8 @@ const ChannelSettings = ({ channelId, closeSettings, channelData }) => {
 	const [tab, setTab] = useState(1);
 	const [openDelete, setOpenDelete] = useState(false);
 	const [openSave, setOpenSave] = React.useState(false);
+	const [dataToSave, setDataToSave] = useState({});
+	const [reset, setReset] = useState(false);
 
 	const handleSaveOpen = () => {
 		setOpenSave(true);
@@ -24,10 +26,19 @@ const ChannelSettings = ({ channelId, closeSettings, channelData }) => {
 
 	const handleSaveClose = () => {
 		setOpenSave(false);
+		setReset(false);
 	};
 
 	const handleCloseDeletePopup = () => {
 		setOpenDelete(false);
+	};
+
+	const handleSaveData = (data) => {
+		setDataToSave(data);
+	};
+
+	const handleResetData = () => {
+		setReset(true);
 	};
 
 	const getTab = () => {
@@ -39,6 +50,8 @@ const ChannelSettings = ({ channelId, closeSettings, channelData }) => {
 						channelId={channelId}
 						openSave={handleSaveOpen}
 						closeSave={handleSaveClose}
+						saveData={(data) => handleSaveData(data)}
+						resetData={reset}
 					/>
 				);
 			case 2:
@@ -134,6 +147,9 @@ const ChannelSettings = ({ channelId, closeSettings, channelData }) => {
 									closeSave={handleSaveClose}
 									openSave={openSave}
 									channelData={channelData}
+									channelId={channelId}
+									dataToSave={dataToSave}
+									resetData={handleResetData}
 								/>
 							</div>
 						</div>

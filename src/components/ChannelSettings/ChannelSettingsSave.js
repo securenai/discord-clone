@@ -4,6 +4,9 @@ import Slide from '@material-ui/core/Slide';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import './ChannelSettingsSave.css';
+import db from '../../firebase';
+import { useDispatch } from 'react-redux';
+import { setChannelInfo } from '../../features/channelSlice';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -22,11 +25,32 @@ const useStyles = makeStyles((theme) => ({
 export default function ChannelSettingsSave({
 	openSave,
 	closeSave,
-	channelData
+	dataToSave,
+	channelData,
+	channelId,
+	resetData
 }) {
 	const classes = useStyles();
+	const dispatch = useDispatch();
 
-	console.log(channelData);
+	const handleSave = () => {
+		console.log('save');
+		closeSave();
+		db.collection('channels').doc(channelId).set(dataToSave, { merge: true });
+		dispatch(
+			setChannelInfo({
+				channelName: dataToSave.channelName
+			})
+		);
+	};
+
+	const handleReset = () => {
+		console.log('reset');
+
+		closeSave();
+		resetData();
+		// db.collection('channels').doc(channelId).set(channelData, { merge: true });
+	};
 
 	return (
 		<div className={classes.root}>
@@ -46,14 +70,14 @@ export default function ChannelSettingsSave({
 								variant="contained"
 								size="small"
 								className="notify_change_btn"
-								onClick={closeSave}>
+								onClick={handleReset}>
 								Reset
 							</Button>
 							<Button
 								variant="contained"
 								size="small"
 								className="notify_change_btn"
-								onClick={closeSave}>
+								onClick={handleSave}>
 								Save Changes
 							</Button>
 						</div>

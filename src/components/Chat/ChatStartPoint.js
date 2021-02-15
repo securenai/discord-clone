@@ -2,12 +2,11 @@ import React from 'react';
 import './ChatStartPoint.css';
 import EditIcon from '@material-ui/icons/Edit';
 import { setWindowInfo } from '../../features/windowSlice';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 const ChatStartPoint = ({ channelId, channelName }) => {
 	const dispatch = useDispatch();
 	const handleChannelEdit = () => {
-		console.log('ddd');
 		dispatch(setWindowInfo({ openChannelSettings: channelId }));
 	};
 

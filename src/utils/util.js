@@ -92,7 +92,7 @@ export const fs_listen = (uid) => {
 	if (userStatusFirestoreRef) {
 		userStatusFirestoreRef.onSnapshot(function (doc) {
 			if (doc.data() === null) {
-				var isOnline = doc.data().state === 'online';
+				// var isOnline = doc.data().state === 'online';
 			}
 		});
 	}

@@ -14,12 +14,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectUser } from '../../features/userSlice';
 import { selectChannels, setAppInfo } from '../../features/appSlice';
 import db, { auth } from '../../firebase';
-import firebase from 'firebase';
+// import firebase from 'firebase';
+import ChannelCreate from '../Channel/ChannelCreate';
 
 const Sidebar = () => {
 	const dispatch = useDispatch();
 	const user = useSelector(selectUser);
 	const channels = useSelector(selectChannels);
+	const [openChannelCreate, setOpenChannelCreate] = useState(false);
 	// const [channels, setChannels] = useState([]);
 
 	useEffect(() => {
@@ -41,7 +43,7 @@ const Sidebar = () => {
 					})
 				)
 			);
-		console.log(channels);
+		// console.log(channels);
 	}, []);
 
 	// useEffect(() => {
@@ -56,18 +58,22 @@ const Sidebar = () => {
 	// 			)
 	// 		);
 	// }, []);
+	const handleCloseCreate = () => {
+		setOpenChannelCreate(false);
+	};
 
 	const handleAddChannel = () => {
-		const channelName = prompt('create channel name:');
-		if (channelName) {
-			db.collection('channels').add({
-				channelName: channelName,
-				channelTopic: '',
-				slowmode: 0,
-				nsfw: false,
-				createdDateTime: firebase.firestore.FieldValue.serverTimestamp()
-			});
-		}
+		setOpenChannelCreate(true);
+		// const channelName = prompt('create channel name:');
+		// if (channelName) {
+		// 	db.collection('channels').add({
+		// 		channelName: channelName,
+		// 		channelTopic: '',
+		// 		slowmode: 0,
+		// 		nsfw: false,
+		// 		createdDateTime: firebase.firestore.FieldValue.serverTimestamp()
+		// 	});
+		// }
 	};
 
 	return (
@@ -116,6 +122,12 @@ const Sidebar = () => {
 					<HeadsetIcon />
 					<SettingsIcon />
 				</div>
+			</div>
+
+			<div>
+				{openChannelCreate === true ? (
+					<ChannelCreate closeCreate={handleCloseCreate} />
+				) : null}
 			</div>
 		</div>
 	);
