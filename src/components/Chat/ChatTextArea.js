@@ -19,7 +19,6 @@ const ChatTextArea = ({
 	const formRef = useRef(null);
 	const btnRef = useRef(null);
 
-	console.log(emojiSelected);
 	useEffect(() => {
 		console.log(text.current);
 		console.log(emojiSelected.native);

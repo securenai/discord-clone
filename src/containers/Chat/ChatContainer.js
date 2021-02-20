@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import './Chat.css';
-import ChatTextArea from './ChatTextArea';
 import { useSelector } from 'react-redux';
 import {
 	selectChannelId,
@@ -8,11 +6,9 @@ import {
 } from '../../features/channelSlice';
 import { selectUser } from '../../features/userSlice';
 import db from '../../firebase';
-import ChatEmojiPicker from './ChatEmojiPicker';
+import Chat from '../../components/presentational/Chat/Chat';
 
-import ChatMessages from './ChatMessages';
-
-const Chat = () => {
+const ChatContainer = () => {
 	const user = useSelector(selectUser);
 	const channelId = useSelector(selectChannelId);
 	const channelName = useSelector(selectChannelName);
@@ -25,7 +21,6 @@ const Chat = () => {
 	};
 
 	const handleSetEmojiSelected = (emoji) => {
-		// console.log(emoji);
 		setEmojiSelected(emoji);
 	};
 
@@ -44,28 +39,17 @@ const Chat = () => {
 	}, [channelId]);
 
 	return (
-		<div className="chat">
-			{/* <ChatHeader channelName={channelName} channelId={channelId} /> */}
-			<ChatMessages
-				channelName={channelName}
-				messages={messages}
-				channelId={channelId}
-			/>
-			<ChatTextArea
-				channelName={channelName}
-				channelId={channelId}
-				user={user}
-				openEmojiPicker={handleOpenEmojiPicker}
-				emojiSelected={emojiSelected}
-			/>
-
-			<div>
-				{openEmojiPicker === true ? (
-					<ChatEmojiPicker setEmojiSelected={handleSetEmojiSelected} />
-				) : null}
-			</div>
-		</div>
+		<Chat
+			channelId={channelId}
+			channelName={channelName}
+			messages={messages}
+			user={user}
+			openEmojiPicker={openEmojiPicker}
+			handleOpenEmojiPicker={handleOpenEmojiPicker}
+			emojiSelected={emojiSelected}
+			handleSetEmojiSelected={handleSetEmojiSelected}
+		/>
 	);
 };
 
-export default Chat;
+export default ChatContainer;

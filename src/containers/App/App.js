@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react';
-import './App.css';
 import { selectUser } from '../../features/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import Login from '../Login/Login';
 import { auth } from '../../firebase';
 import { login, logout } from '../../features/userSlice';
-import Channel from '../Channel/Channel';
 import { rtdb_and_local_fs_presence, fs_listen } from '../../utils/util';
+import LoginContainer from '../Login/LoginContainer';
+import Channel from '../../components/presentational/Channel/Channel';
 
 function App() {
 	const dispatch = useDispatch();
@@ -32,7 +31,7 @@ function App() {
 		});
 	}, [dispatch]);
 
-	return <div className="app">{user ? <Channel /> : <Login />}</div>;
+	return <div className="app">{user ? <Channel /> : <LoginContainer />}</div>;
 }
 
 export default App;
